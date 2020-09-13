@@ -1,0 +1,614 @@
+# Mission File Version = 1.0;
+
+Options
+{
+  LCName = 0;
+  LCDesc = 1;
+  LCAuthor = 2;
+  PlayerConfig = "";
+  Time = 12:30:0;
+  Date = 19.11.1942;
+  HMap = "graphics\landscape\height.hini";
+  Textures = "graphics\landscape\textures.tini";
+  Forests = "graphics\landscape\trees\woods.wds";
+  Layers = "";
+  GuiMap = "lapino-winter";
+  SeasonPrefix = "wi";
+  MissionType = 3;
+  AqmId = 0;
+  CloudLevel = 500;
+  CloudHeight = 200;
+  PrecLevel = 0;
+  PrecType = 0;
+  CloudConfig = "winter\00_clear_00\sky.ini";
+  SeaState = 0;
+  Turbulence = 0;
+  TempPressLevel = 0;
+  Temperature = -15;
+  Pressure = 760;
+  WindLayers
+  {
+    0 :     0 :     0;
+    500 :     0 :     0;
+    1000 :     0 :     0;
+    2000 :     0 :     0;
+    5000 :     0 :     0;
+  }
+  Countries
+  {
+    0 : 0;
+    101 : 1;
+    102 : 1;
+    103 : 1;
+    201 : 2;
+    202 : 2;
+    203 : 2;
+    301 : 3;
+    302 : 3;
+    303 : 3;
+    304 : 3;
+    305 : 3;
+    401 : 4;
+    402 : 4;
+  }
+}
+
+Group
+{
+  Name = "Group3";
+  Index = 2;
+  Desc = "";
+  Group
+  {
+    Name = "Group1";
+    Index = 3;
+    Desc = "";
+    Plane
+    {
+      Name = "Plane1";
+      Index = 4;
+      LinkTrId = 5;
+      XPos = 29054.343;
+      YPos = 110.324;
+      ZPos = 23685.375;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 11.60;
+      Script = "LuaScripts\WorldObjects\Planes\il2m41.txt";
+      Model = "graphics\planes\il2m41\il2m41.mgm";
+      Country = 0;
+      Desc = "";
+      Skin = "";
+      AILevel = 2;
+      CoopStart = 0;
+      NumberInFormation = 0;
+      Vulnerable = 1;
+      Engageable = 1;
+      LimitAmmo = 1;
+      StartInAir = 2;
+      Callsign = 0;
+      Callnum = 0;
+      Time = 60;
+      DamageReport = 50;
+      DamageThreshold = 1;
+      PayloadId = 0;
+      WMMask = 1;
+      AiRTBDecision = 0;
+      DeleteAfterDeath = 1;
+      Spotter = -1;
+      Fuel = 1;
+    }
+    
+
+    MCU_TR_Entity
+    {
+      Index = 5;
+      Name = "Plane entity";
+      Desc = "";
+      Targets = [];
+      Objects = [];
+      XPos = 29054.343;
+      YPos = 110.524;
+      ZPos = 23685.375;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      Enabled = 1;
+      MisObjID = 4;
+    }
+    
+
+    Plane
+    {
+      Name = "Plane2";
+      Index = 7;
+      LinkTrId = 8;
+      XPos = 29718.886;
+      YPos = 108.585;
+      ZPos = 23638.576;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      Script = "LuaScripts\WorldObjects\Planes\lagg3s29.txt";
+      Model = "graphics\planes\lagg3s29\lagg3s29.mgm";
+      Country = 0;
+      Desc = "";
+      Skin = "";
+      AILevel = 2;
+      CoopStart = 0;
+      NumberInFormation = 0;
+      Vulnerable = 1;
+      Engageable = 1;
+      LimitAmmo = 1;
+      StartInAir = 2;
+      Callsign = 0;
+      Callnum = 0;
+      Time = 60;
+      DamageReport = 50;
+      DamageThreshold = 1;
+      PayloadId = 0;
+      WMMask = 1;
+      AiRTBDecision = 0;
+      DeleteAfterDeath = 1;
+      Spotter = -1;
+      Fuel = 1;
+    }
+    
+
+    MCU_TR_Entity
+    {
+      Index = 8;
+      Name = "Plane entity";
+      Desc = "";
+      Targets = [];
+      Objects = [];
+      XPos = 29718.886;
+      YPos = 108.785;
+      ZPos = 23638.576;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      Enabled = 0;
+      MisObjID = 7;
+      OnEvents
+      {
+        OnEvent
+        {
+          Type = 5;
+          TarId = 10;
+        }
+      }
+    }
+    
+
+    Vehicle
+    {
+      Name = "Vehicle";
+      Index = 11;
+      LinkTrId = 12;
+      XPos = 29435.909;
+      YPos = 108.588;
+      ZPos = 24165.873;
+      XOri = 359.99;
+      YOri = 0.00;
+      ZOri = 0.00;
+      Script = "LuaScripts\WorldObjects\vehicles\benzlkw.txt";
+      Model = "graphics\vehicles\benzlkw\benzlkw.mgm";
+      Desc = "";
+      Country = 0;
+      NumberInFormation = 0;
+      Vulnerable = 1;
+      Engageable = 1;
+      LimitAmmo = 1;
+      AILevel = 2;
+      DamageReport = 50;
+      DamageThreshold = 1;
+      DeleteAfterDeath = 1;
+      CoopStart = 0;
+      Spotter = -1;
+      BeaconChannel = 0;
+      Callsign = 0;
+      PayloadId = 0;
+      WMMask = 1;
+      Fuel = 1;
+      Callnum = 0;
+      Skin = "";
+      RepairFriendlies = 0;
+      RehealFriendlies = 0;
+      RearmFriendlies = 0;
+      RefuelFriendlies = 0;
+      RepairTime = 0;
+      RehealTime = 0;
+      RearmTime = 0;
+      RefuelTime = 0;
+      MaintenanceRadius = 10;
+    }
+    
+
+    MCU_Counter
+    {
+      Index = 10;
+      Name = "Trigger Counter";
+      Desc = "";
+      Targets = [];
+      Objects = [];
+      XPos = 30257.482;
+      YPos = 111.428;
+      ZPos = 24423.031;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      Counter = 1;
+      Dropcount = 0;
+    }
+    
+
+    MCU_CMD_Land
+    {
+      Index = 14;
+      Name = "command Land";
+      Desc = "";
+      Targets = [];
+      Objects = [8];
+      XPos = 30586.111;
+      YPos = 109.599;
+      ZPos = 23678.138;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      Priority = 1;
+    }
+    
+
+    MCU_TR_Entity
+    {
+      Index = 12;
+      Name = "Vehicle entity";
+      Desc = "";
+      Targets = [];
+      Objects = [];
+      XPos = 29435.909;
+      YPos = 108.788;
+      ZPos = 24165.873;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      Enabled = 1;
+      MisObjID = 11;
+      OnReports
+      {
+        OnReport
+        {
+          Type = 0;
+          CmdId = 16;
+          TarId = 17;
+        }
+        OnReport
+        {
+          Type = 0;
+          CmdId = 16;
+          TarId = 17;
+        }		
+      }
+    }
+    
+
+    MCU_CMD_AttackTarget
+    {
+      Index = 17;
+      Name = "command Attack";
+      Desc = "";
+      Targets = [];
+      Objects = [];
+      XPos = 29773.402;
+      YPos = 108.878;
+      ZPos = 24303.687;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      AttackGroup = 1;
+      Priority = 1;
+    }
+    
+
+    MCU_Spawner
+    {
+      Index = 16;
+      Name = "Trigger Spawner";
+      Desc = "";
+      Targets = [];
+      Objects = [];
+      XPos = 29562.280;
+      YPos = 110.334;
+      ZPos = 24447.367;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      SpawnAtMe = 0;
+    }
+    
+
+  }
+  
+
+  Group
+  {
+    Name = "Group2";
+    Index = 20;
+    Desc = "";
+    Vehicle
+    {
+      Name = "Vehicle1";
+      Index = 21;
+      LinkTrId = 22;
+      XPos = 29634.649;
+      YPos = 121.917;
+      ZPos = 25866.199;
+      XOri = 358.73;
+      YOri = 0.00;
+      ZOri = 0.34;
+      Script = "LuaScripts\WorldObjects\vehicles\_su122.txt";
+      Model = "graphics\vehicles\_su122\_su122.mgm";
+      Desc = "";
+      Country = 0;
+      NumberInFormation = 0;
+      Vulnerable = 1;
+      Engageable = 1;
+      LimitAmmo = 1;
+      AILevel = 2;
+      DamageReport = 50;
+      DamageThreshold = 1;
+      DeleteAfterDeath = 1;
+      CoopStart = 0;
+      Spotter = -1;
+      BeaconChannel = 0;
+      Callsign = 0;
+      PayloadId = 0;
+      WMMask = 1;
+      Fuel = 1;
+      Callnum = 0;
+      Skin = "";
+      RepairFriendlies = 0;
+      RehealFriendlies = 0;
+      RearmFriendlies = 0;
+      RefuelFriendlies = 0;
+      RepairTime = 0;
+      RehealTime = 0;
+      RearmTime = 0;
+      RefuelTime = 0;
+      MaintenanceRadius = 10;
+    }
+    
+
+    MCU_TR_Entity
+    {
+      Index = 22;
+      Name = "Vehicle1 entity";
+      Desc = "";
+      Targets = [];
+      Objects = [];
+      XPos = 29634.649;
+      YPos = 122.117;
+      ZPos = 25866.199;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      Enabled = 1;
+      MisObjID = 21;
+      OnReports
+      {
+        OnReport
+        {
+          Type = 0;
+          CmdId = 16;
+          TarId = 17;
+        }
+      }
+    }
+    
+
+    Vehicle
+    {
+      Name = "Vehicle2";
+      Index = 24;
+      LinkTrId = 25;
+      XPos = 28998.185;
+      YPos = 119.890;
+      ZPos = 25866.199;
+      XOri = 359.17;
+      YOri = 0.00;
+      ZOri = 0.06;
+      Script = "LuaScripts\WorldObjects\vehicles\_su152.txt";
+      Model = "graphics\vehicles\_su152\_su152.mgm";
+      Desc = "";
+      Country = 0;
+      NumberInFormation = 0;
+      Vulnerable = 1;
+      Engageable = 1;
+      LimitAmmo = 1;
+      AILevel = 2;
+      DamageReport = 50;
+      DamageThreshold = 1;
+      DeleteAfterDeath = 1;
+      CoopStart = 0;
+      Spotter = -1;
+      BeaconChannel = 0;
+      Callsign = 0;
+      PayloadId = 0;
+      WMMask = 1;
+      Fuel = 1;
+      Callnum = 0;
+      Skin = "";
+      RepairFriendlies = 0;
+      RehealFriendlies = 0;
+      RearmFriendlies = 0;
+      RefuelFriendlies = 0;
+      RepairTime = 0;
+      RehealTime = 0;
+      RearmTime = 0;
+      RefuelTime = 0;
+      MaintenanceRadius = 10;
+    }
+    
+
+    MCU_TR_Entity
+    {
+      Index = 25;
+      Name = "Vehicle2 entity";
+      Desc = "";
+      Targets = [];
+      Objects = [];
+      XPos = 28998.185;
+      YPos = 120.090;
+      ZPos = 25866.199;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      Enabled = 1;
+      MisObjID = 24;
+    }
+    
+
+    Plane
+    {
+      Name = "Plane";
+      Index = 27;
+      LinkTrId = 0;
+      XPos = 29359.229;
+      YPos = 114.754;
+      ZPos = 25305.121;
+      XOri = 359.47;
+      YOri = 0.00;
+      ZOri = 13.00;
+      Script = "LuaScripts\WorldObjects\Planes\lagg3s29.txt";
+      Model = "graphics\planes\lagg3s29\lagg3s29.mgm";
+      Country = 0;
+      Desc = "";
+      Skin = "";
+      AILevel = 2;
+      CoopStart = 0;
+      NumberInFormation = 0;
+      Vulnerable = 1;
+      Engageable = 1;
+      LimitAmmo = 1;
+      StartInAir = 2;
+      Callsign = 0;
+      Callnum = 0;
+      Time = 60;
+      DamageReport = 50;
+      DamageThreshold = 1;
+      PayloadId = 0;
+      WMMask = 1;
+      AiRTBDecision = 0;
+      DeleteAfterDeath = 1;
+      Spotter = -1;
+      Fuel = 1;
+    }
+    
+
+  }
+  
+
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 28;
+  LinkTrId = 0;
+  XPos = 29609.341;
+  YPos = 114.604;
+  ZPos = 25369.811;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\vl_selsovet.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\vl_selsovet.txt";
+  Country = 102;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 29;
+  LinkTrId = 0;
+  XPos = 30233.474;
+  YPos = 118.941;
+  ZPos = 25229.241;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\vl_selsovet.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\vl_selsovet.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+}
+
+
+
+MCU_TR_ComplexTrigger
+{
+  Index = 30;
+  Name = "Translator Complex Trigger";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 30312.274;
+  YPos = 113.741;
+  ZPos = 24696.543;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  Enabled = 1;
+  Cylinder = 1;
+  Radius = 1000;
+  DamageThreshold = 1;
+  DamageReport = 50;
+  CheckVehicles = 0;
+  CheckPlanes = 0;
+  EventsFilterSpawned = 0;
+  EventsFilterEnteredSimple = 1;
+  EventsFilterEnteredAlive = 0;
+  EventsFilterLeftSimple = 0;
+  EventsFilterLeftAlive = 0;
+  EventsFilterFinishedSimple = 0;
+  EventsFilterFinishedAlive = 0;
+  EventsFilterStationaryAndAlive = 0;
+  EventsFilterFinishedStationaryAndAlive = 0;
+  EventsFilterTookOff = 0;
+  EventsFilterDamaged = 0;
+  EventsFilterCriticallyDamaged = 0;
+  EventsFilterRepaired = 0;
+  EventsFilterKilled = 0;
+  EventsFilterDropedBombs = 0;
+  EventsFilterFiredFlare = 0;
+  EventsFilterFiredRockets = 0;
+  EventsFilterDroppedCargoContainers = 0;
+  EventsFilterDeliveredCargo = 0;
+  EventsFilterParatrooperJumped = 0;
+  EventsFilterParatrooperLandedAlive = 0;
+  Country = 201;
+  Country = 102;
+  Country = 103;
+  ObjectScript = "luascripts\worldobjects\planes\bf109g4.txt";
+  ObjectScript = "luascripts\worldobjects\planes\p38j25.txt";
+  ObjectScript = "luascripts\worldobjects\planes\p40e1.txt";
+  ObjectScript = "luascripts\worldobjects\planes\p47d22.txt";
+}
+
+
+# end of file
