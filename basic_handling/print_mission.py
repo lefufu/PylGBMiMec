@@ -1,9 +1,13 @@
+import os
+import shutil
+
 from basic_handling.error_handling import *
 from basic_handling.mission_class import Mission, StrProp, offset
 from basic_handling.object_class import AllObject
 
 #header and footer to add in mission file
 from declarations.country import CountryName
+from declarations.file_extentions import LANG_FILE_EXT
 from declarations.properties_specials import NAME, INDEX, DESC, GROUP, COUNTRY
 
 HEADER = "# Mission File Version = 1.0;\n"
@@ -49,7 +53,6 @@ def printGroup(group:AllObject, mission:Mission, filepointer):
 # ---------------------------------------------
 def printMission(mission:Mission, filename: str = ''):
     """ print contain of a mission in console or in file """
-    #TODO : copy .eng files
     outputfile = None
     fileflag = 0
     if filename != '':
@@ -59,6 +62,12 @@ def printMission(mission:Mission, filename: str = ''):
             CriticalError(CAN_NOT_WRITE_FILE.format(filename))
         fileflag = 1
 
+    # copy langage files
+    for extension in LANG_FILE_EXT:
+        origLangFileName = mission.FileName.replace('.Mission',extension)
+        destLangFileName = filename.replace('.Mission',extension)
+        if os.path.exists(origLangFileName):
+            shutil.copyfile(origLangFileName,destLangFileName)
     # process all level 0 objects
     for obj in sorted(mission.ObjList) :
         mobjet=mission.ObjList[obj]
@@ -101,3 +110,9 @@ def scanObjectList(mission:Mission, objectList: list, *properties):
                 convert2str += ", "+str(prop)+"="+str(propval)
 
     return convert2str
+
+# ---------------------------------------------
+def copy_other_files(SrcfileName:str, destFileName):
+    """ copy all associated language files"""
+
+    return

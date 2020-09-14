@@ -7,7 +7,6 @@ from declarations import *
 from declarations.map_size import *
 from declarations.properties_specials import GUIMAP, OPTIONS, GROUP, XPOS, ZPOS
 
-
 class Mission:
     """Mission Class, contain an array of AllObject objects
 
@@ -36,6 +35,9 @@ class Mission:
     splitNB : int
     number of X/Z sector to use for indexing
 
+    fileName : str
+    name of input filename
+
     Methods
     -------
     AddObject
@@ -53,6 +55,7 @@ class Mission:
         self.Zmin: float = 0.0
         self.Zmax: float = 0.0
         self.splitNB: int = 0
+        self.FileName: str = ''
 # ---------------------------------------------
     def __str__(self):
         ''' convert mission in something that can be displayed'''
@@ -122,6 +125,7 @@ def ReadMissionFromFile(mission:Mission, fileName: str) -> object:
         filePointer=open(fileName)
         if not filePointer:
             CriticalError(CAN_NOT_OPEN_FILE.format(fileName))
+        mission.FileName=fileName
         #get first object type
         last_pos = filePointer.tell()
         objectType = getBegining(filePointer)
