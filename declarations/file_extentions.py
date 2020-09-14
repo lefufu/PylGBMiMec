@@ -1,0 +1,1 @@
+LANG_FILE_EXT=('.chs','.eng','.fra','.ger','.list','.pol','.rus','.spa')
