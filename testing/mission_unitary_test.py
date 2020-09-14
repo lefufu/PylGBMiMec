@@ -15,7 +15,8 @@ from declarations.country import *
 
 print("test on simple mission")
 newMission=Mission()
-ReadMissionFromFile(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\MyMission.Mission")
+#ReadMissionFromFile(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\MyMission.Mission")
+ReadMissionFromFile(newMission,"MyMission.Mission")
 print(newMission)
 
 print("\n******************")
@@ -68,13 +69,14 @@ set_ObjScriptList(newMission, ctrigger, Countries=[CountryID['United States'], C
 print(scanObjectList(newMission, ctrigger, 'Name', 'Type', 'LinkTrId','ObjectScript','Country'))
 print("\n******************")
 print('write modified mission')
-printMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_mini.Mission")
+#printMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_mini.Mission")
+printMission(newMission,"test_mini.Mission")
 
 print("***************************************")
 print("read / write big mission and select objects by coordinates")
 print("modify some object in staraya reka around X=29877.51 & Z=57212.42")
 print("4 objects should be found and modified")
-ReadMissionFromFile(newMission,r"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\Velikiye Luki tutorial finished.Mission")
+ReadMissionFromFile(newMission,r"Velikiye Luki tutorial finished.Mission")
 blockTarget = findObject(newMission, Type='Block', XPos=range(29875,29880), ZPos=range(57210, 57215))
 block2Modify = findObjectInRange(newMission, blockTarget, Range=200, Type='Block')
 print(scanObjectList(newMission, blockTarget, 'Name', 'XPos', 'Zpos', 'Country'))
@@ -82,5 +84,6 @@ print(scanObjectList(newMission, block2Modify, 'Name', 'XPos', 'Zpos', 'Country'
 modify_kv(newMission, block2Modify, Country=CountryID['Germany'])
 print(scanObjectList(newMission, block2Modify, 'Name', 'XPos', 'Zpos', 'Country'))
 print('write modified mission')
-printMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_Vluki.Mission")
+#printMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_Vluki.Mission")
+printMission(newMission,"test_Vluki.Mission")
 
