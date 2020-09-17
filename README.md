@@ -1,5 +1,5 @@
 # PylGBMiMec
-**Py**thon I**l2** **G**reat **B**attle **Mi**ssion **Mec**hanic
+**Py**thon I**l**2 **G**reat **B**attle **Mi**ssion **Mec**hanic
 
 # What is Pyl2GB MiMec ?
 A python library to automatize some painfull processes in IL2 GB mission creation.
