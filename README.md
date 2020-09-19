@@ -17,8 +17,9 @@ It will allow you to load a mission, search and modify by lot any mission object
 >eg findObjectInRange(newMission, blockTarget, Range=200, Type='Block')
 
 **modify_kv** : modify keys given in parameters with according values given also in parameters
+>Some values may be pragma function that provide values based on object properties, like adding a constant value to Ypos of each object of the list.
+
 >eg modify_kv(newMission, plane1, XPos=changedX, AILevel=1, Name=changedName, Enabled=0,Country=CountryID['Germany'])
-Some values may be pragma function that provide values based on object properties, like adding a constant value to Ypos of each object of the list.
 
 **
 
