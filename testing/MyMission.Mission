@@ -26,6 +26,7 @@ Options
   TempPressLevel = 0;
   Temperature = -15;
   Pressure = 760;
+  Haze = 0;
   WindLayers
   {
     0 :     0 :     0;
@@ -68,8 +69,8 @@ Group
       Name = "Plane1";
       Index = 4;
       LinkTrId = 5;
-      XPos = 29054.343;
-      YPos = 110.324;
+      XPos = 29064.343;
+      YPos = 110.374;
       ZPos = 23685.375;
       XOri = 0.00;
       YOri = 0.00;
@@ -79,7 +80,7 @@ Group
       Country = 0;
       Desc = "";
       Skin = "";
-      AILevel = 2;
+      AILevel = 1;
       CoopStart = 0;
       NumberInFormation = 0;
       Vulnerable = 1;
@@ -107,13 +108,13 @@ Group
       Desc = "";
       Targets = [];
       Objects = [];
-      XPos = 29054.343;
-      YPos = 110.524;
+      XPos = 29064.343;
+      YPos = 110.574;
       ZPos = 23685.375;
       XOri = 0.00;
       YOri = 0.00;
       ZOri = 0.00;
-      Enabled = 1;
+      Enabled = 0;
       MisObjID = 4;
     }
     
@@ -121,10 +122,10 @@ Group
     Plane
     {
       Name = "Plane2";
-      Index = 7;
-      LinkTrId = 8;
+      Index = 8;
+      LinkTrId = 9;
       XPos = 29718.886;
-      YPos = 108.585;
+      YPos = 110.374;
       ZPos = 23638.576;
       XOri = 0.00;
       YOri = 0.00;
@@ -157,37 +158,55 @@ Group
 
     MCU_TR_Entity
     {
-      Index = 8;
+      Index = 9;
       Name = "Plane entity";
       Desc = "";
       Targets = [];
       Objects = [];
       XPos = 29718.886;
-      YPos = 108.785;
+      YPos = 110.574;
       ZPos = 23638.576;
       XOri = 0.00;
       YOri = 0.00;
       ZOri = 0.00;
       Enabled = 0;
-      MisObjID = 7;
+      MisObjID = 8;
       OnEvents
       {
         OnEvent
         {
           Type = 5;
-          TarId = 10;
+          TarId = 11;
         }
       }
+    }
+    
+
+    MCU_Counter
+    {
+      Index = 11;
+      Name = "Trigger Counter";
+      Desc = "";
+      Targets = [];
+      Objects = [];
+      XPos = 30257.482;
+      YPos = 111.428;
+      ZPos = 24423.031;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      Counter = 1;
+      Dropcount = 0;
     }
     
 
     Vehicle
     {
       Name = "Vehicle";
-      Index = 11;
-      LinkTrId = 12;
+      Index = 13;
+      LinkTrId = 14;
       XPos = 29435.909;
-      YPos = 108.588;
+      YPos = 110.374;
       ZPos = 24165.873;
       XOri = 359.99;
       YOri = 0.00;
@@ -225,31 +244,75 @@ Group
     }
     
 
-    MCU_Counter
+    MCU_TR_Entity
     {
-      Index = 10;
-      Name = "Trigger Counter";
+      Index = 14;
+      Name = "Vehicle entity";
       Desc = "";
       Targets = [];
       Objects = [];
-      XPos = 30257.482;
-      YPos = 111.428;
-      ZPos = 24423.031;
+      XPos = 29435.909;
+      YPos = 110.574;
+      ZPos = 24165.873;
       XOri = 0.00;
       YOri = 0.00;
       ZOri = 0.00;
-      Counter = 1;
-      Dropcount = 0;
+      Enabled = 1;
+      MisObjID = 13;
+      OnEvents
+      {
+        OnEvent
+        {
+          Type = 12;
+          TarId = 11;
+        }
+        OnEvent
+        {
+          Type = 13;
+          TarId = 16;
+        }
+        OnEvent
+        {
+          Type = 15;
+          TarId = 7;
+        }
+        OnEvent
+        {
+          Type = 74;
+          TarId = 17;
+        }
+      }
+      OnReports
+      {
+        OnReport
+        {
+          Type = 0;
+          CmdId = 18;
+          TarId = 16;
+        }
+        OnReport
+        {
+          Type = 0;
+          CmdId = 18;
+          TarId = 16;
+        }
+        OnReport
+        {
+          Type = 1;
+          CmdId = 16;
+          TarId = 11;
+        }
+      }
     }
     
 
     MCU_CMD_Land
     {
-      Index = 14;
+      Index = 7;
       Name = "command Land";
       Desc = "";
       Targets = [];
-      Objects = [8];
+      Objects = [9];
       XPos = 30586.111;
       YPos = 109.599;
       ZPos = 23678.138;
@@ -260,60 +323,9 @@ Group
     }
     
 
-    MCU_TR_Entity
-    {
-      Index = 12;
-      Name = "Vehicle entity";
-      Desc = "";
-      Targets = [];
-      Objects = [];
-      XPos = 29435.909;
-      YPos = 108.788;
-      ZPos = 24165.873;
-      XOri = 0.00;
-      YOri = 0.00;
-      ZOri = 0.00;
-      Enabled = 1;
-      MisObjID = 11;
-      OnReports
-      {
-        OnReport
-        {
-          Type = 0;
-          CmdId = 16;
-          TarId = 17;
-        }
-        OnReport
-        {
-          Type = 0;
-          CmdId = 16;
-          TarId = 17;
-        }		
-      }
-    }
-    
-
-    MCU_CMD_AttackTarget
-    {
-      Index = 17;
-      Name = "command Attack";
-      Desc = "";
-      Targets = [];
-      Objects = [];
-      XPos = 29773.402;
-      YPos = 108.878;
-      ZPos = 24303.687;
-      XOri = 0.00;
-      YOri = 0.00;
-      ZOri = 0.00;
-      AttackGroup = 1;
-      Priority = 1;
-    }
-    
-
     MCU_Spawner
     {
-      Index = 16;
+      Index = 18;
       Name = "Trigger Spawner";
       Desc = "";
       Targets = [];
@@ -328,21 +340,39 @@ Group
     }
     
 
+    MCU_CMD_AttackTarget
+    {
+      Index = 16;
+      Name = "command Attack";
+      Desc = "";
+      Targets = [];
+      Objects = [];
+      XPos = 30320.759;
+      YPos = 108.878;
+      ZPos = 24670.028;
+      XOri = 0.00;
+      YOri = 0.00;
+      ZOri = 0.00;
+      AttackGroup = 1;
+      Priority = 1;
+    }
+    
+
   }
   
 
   Group
   {
     Name = "Group2";
-    Index = 20;
+    Index = 22;
     Desc = "";
     Vehicle
     {
       Name = "Vehicle1";
-      Index = 21;
-      LinkTrId = 22;
+      Index = 23;
+      LinkTrId = 24;
       XPos = 29634.649;
-      YPos = 121.917;
+      YPos = 110.374;
       ZPos = 25866.199;
       XOri = 358.73;
       YOri = 0.00;
@@ -382,26 +412,26 @@ Group
 
     MCU_TR_Entity
     {
-      Index = 22;
+      Index = 24;
       Name = "Vehicle1 entity";
       Desc = "";
       Targets = [];
       Objects = [];
       XPos = 29634.649;
-      YPos = 122.117;
+      YPos = 110.574;
       ZPos = 25866.199;
       XOri = 0.00;
       YOri = 0.00;
       ZOri = 0.00;
       Enabled = 1;
-      MisObjID = 21;
+      MisObjID = 23;
       OnReports
       {
         OnReport
         {
           Type = 0;
-          CmdId = 16;
-          TarId = 17;
+          CmdId = 18;
+          TarId = 16;
         }
       }
     }
@@ -410,10 +440,10 @@ Group
     Vehicle
     {
       Name = "Vehicle2";
-      Index = 24;
-      LinkTrId = 25;
+      Index = 26;
+      LinkTrId = 27;
       XPos = 28998.185;
-      YPos = 119.890;
+      YPos = 110.374;
       ZPos = 25866.199;
       XOri = 359.17;
       YOri = 0.00;
@@ -453,26 +483,26 @@ Group
 
     MCU_TR_Entity
     {
-      Index = 25;
+      Index = 27;
       Name = "Vehicle2 entity";
       Desc = "";
       Targets = [];
       Objects = [];
       XPos = 28998.185;
-      YPos = 120.090;
+      YPos = 110.574;
       ZPos = 25866.199;
       XOri = 0.00;
       YOri = 0.00;
       ZOri = 0.00;
       Enabled = 1;
-      MisObjID = 24;
+      MisObjID = 26;
     }
     
 
     Plane
     {
       Name = "Plane";
-      Index = 27;
+      Index = 29;
       LinkTrId = 0;
       XPos = 29359.229;
       YPos = 114.754;
@@ -516,17 +546,17 @@ Group
 Block
 {
   Name = "Block";
-  Index = 28;
+  Index = 30;
   LinkTrId = 0;
-  XPos = 29609.341;
-  YPos = 114.604;
-  ZPos = 25369.811;
+  XPos = 29786.685;
+  YPos = 112.353;
+  ZPos = 25044.497;
   XOri = 0.00;
   YOri = 0.00;
   ZOri = 0.00;
   Model = "graphics\blocks\vl_selsovet.mgm";
   Script = "LuaScripts\WorldObjects\Blocks\vl_selsovet.txt";
-  Country = 102;
+  Country = 0;
   Desc = "";
   Durability = 25000;
   DamageReport = 50;
@@ -539,7 +569,7 @@ Block
 Block
 {
   Name = "Block";
-  Index = 29;
+  Index = 31;
   LinkTrId = 0;
   XPos = 30233.474;
   YPos = 118.941;
@@ -561,7 +591,7 @@ Block
 
 MCU_TR_ComplexTrigger
 {
-  Index = 30;
+  Index = 17;
   Name = "Translator Complex Trigger";
   Desc = "";
   Targets = [];
@@ -601,13 +631,215 @@ MCU_TR_ComplexTrigger
   EventsFilterDeliveredCargo = 0;
   EventsFilterParatrooperJumped = 0;
   EventsFilterParatrooperLandedAlive = 0;
-  Country = 201;
-  Country = 102;
-  Country = 103;
-  ObjectScript = "luascripts\worldobjects\planes\bf109g4.txt";
-  ObjectScript = "luascripts\worldobjects\planes\p38j25.txt";
-  ObjectScript = "luascripts\worldobjects\planes\p40e1.txt";
-  ObjectScript = "luascripts\worldobjects\planes\p47d22.txt";
+  Country = 101;
+  ObjectScript = "luascripts\worldobjects\planes\il2m41.txt";
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 35;
+  LinkTrId = 0;
+  XPos = 29729.967;
+  YPos = 109.338;
+  ZPos = 24504.818;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\static_bf110e2_open.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\static_bf110e2_open.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 36;
+  LinkTrId = 0;
+  XPos = 29129.379;
+  YPos = 109.188;
+  ZPos = 25379.987;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\static_bf110e2_open.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\static_bf110e2_open.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 37;
+  LinkTrId = 0;
+  XPos = 29106.737;
+  YPos = 108.585;
+  ZPos = 24267.827;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\static_bf110e2_open.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\static_bf110e2_open.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 38;
+  LinkTrId = 0;
+  XPos = 29909.529;
+  YPos = 125.690;
+  ZPos = 25949.835;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\static_bf110e2_open.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\static_bf110e2_open.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 39;
+  LinkTrId = 0;
+  XPos = 30815.181;
+  YPos = 144.938;
+  ZPos = 25668.303;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\static_bf110e2_open.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\static_bf110e2_open.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 40;
+  LinkTrId = 0;
+  XPos = 31184.913;
+  YPos = 131.969;
+  ZPos = 24600.767;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\static_bf110e2_open.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\static_bf110e2_open.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 41;
+  LinkTrId = 0;
+  XPos = 30926.319;
+  YPos = 111.559;
+  ZPos = 23803.436;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\static_bf110e2_open.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\static_bf110e2_open.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 42;
+  LinkTrId = 0;
+  XPos = 30314.314;
+  YPos = 109.024;
+  ZPos = 23648.279;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\static_bf110e2_open.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\static_bf110e2_open.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+}
+
+
+
+Block
+{
+  Name = "Block";
+  Index = 43;
+  LinkTrId = 0;
+  XPos = 29680.758;
+  YPos = 108.585;
+  ZPos = 23712.928;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\blocks\static_bf110e2_open.mgm";
+  Script = "LuaScripts\WorldObjects\Blocks\static_bf110e2_open.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
 }
 
 

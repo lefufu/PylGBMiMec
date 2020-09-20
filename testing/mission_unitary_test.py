@@ -3,20 +3,20 @@
  """
 #TODO deplace files in local DIRECTORY
 
-from basic_handling.mission_class import *
-from basic_handling.find_object import *
-from basic_handling.modify_object import *
-from basic_handling.print_mission import *
+from basic_functions.mission_class import *
+from basic_functions.find_object import *
+from basic_functions.modify_object import *
+from basic_functions.save_mission import *
 from declarations.country import *
 
-#ReadMissionFromFile(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\_gen.Mission")
-#printMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\testMission2.Mission")
-#ReadMissionFromFile(newMission,r"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\Velikiye Luki tutorial finished.Mission")
+#readMissionFromFile(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\_gen.Mission")
+#saveMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\testMission2.Mission")
+#readMissionFromFile(newMission,r"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\Velikiye Luki tutorial finished.Mission")
 
 print("test on simple mission")
 newMission=Mission()
-#ReadMissionFromFile(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\MyMission.Mission")
-ReadMissionFromFile(newMission,"MyMission.Mission")
+#readMissionFromFile(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\MyMission.Mission")
+readMissionFromFile(newMission, "MyMission.Mission")
 print(newMission)
 
 print("\n******************")
@@ -69,14 +69,14 @@ set_ObjScriptList(newMission, ctrigger, Countries=[CountryID['United States'], C
 print(scanObjectList(newMission, ctrigger, 'Name', 'Type', 'LinkTrId','ObjectScript','Country'))
 print("\n******************")
 print('write modified mission')
-#printMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_mini.Mission")
-printMission(newMission,"test_mini.Mission")
+#saveMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_mini.Mission")
+saveMission(newMission, "test_mini.Mission")
 
 print("***************************************")
 print("read / write big mission and select objects by coordinates")
 print("modify some object in staraya reka around X=29877.51 & Z=57212.42")
 print("4 objects should be found and modified")
-ReadMissionFromFile(newMission,r"Velikiye Luki tutorial finished.Mission")
+readMissionFromFile(newMission, r"Velikiye Luki tutorial finished.Mission")
 blockTarget = findObject(newMission, Type='Block', XPos=range(29875,29880), ZPos=range(57210, 57215))
 block2Modify = findObjectInRange(newMission, blockTarget, Range=200, Type='Block')
 print(scanObjectList(newMission, blockTarget, 'Name', 'XPos', 'Zpos', 'Country'))
@@ -84,6 +84,6 @@ print(scanObjectList(newMission, block2Modify, 'Name', 'XPos', 'Zpos', 'Country'
 modify_kv(newMission, block2Modify, Country=CountryID['Germany'])
 print(scanObjectList(newMission, block2Modify, 'Name', 'XPos', 'Zpos', 'Country'))
 print('write modified mission')
-#printMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_Vluki.Mission")
-printMission(newMission,"test_Vluki.Mission")
+#saveMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_Vluki.Mission")
+saveMission(newMission, "test_Vluki.Mission")
 
