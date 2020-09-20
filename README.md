@@ -12,6 +12,7 @@ The following use case can be already done with few python lines:
 > update Complex Trigger to replace planes/vehicules scripts and country (usefull if you import AA group that were not design for the plane of the current mission)  
 
 # Main functions
+The functions will be detailled in the wiki (to be done for the moment)
 ## Read mission file
 **readMissionFromFile** : load any IL2 GB .Mission file and reference it as an object containing all missions objects
 > eg : readMissionFromFile(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\MyMission.Mission")
@@ -77,7 +78,7 @@ eg set_ObjScriptList(newMission, ctrigger, Countries=[CountryID['United States']
 > All localization files (.eng, .fra,..) of the original mission will be copied accordingly to the new name.
 > eg saveMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_mini.Mission")
 
-# how to install / use
+# How to install / use
 ## Installation
 * Download and install python 3.x from [python.org](https://www.python.org/downloads/windows/)
 > if you are using an IDE, you should know how to integrate MiMec code in it without installign again python. I can not document for all IDE.
