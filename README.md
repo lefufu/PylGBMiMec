@@ -34,7 +34,15 @@ It will allow you to load a mission, search and modify by lot any mission object
 >eg add_in_objectList(myMission, WayPoints, leaderPlane)
 
 **set_as_objectList** : set a list of object as "object" for another list of objects, overwrite the exising "object" list
->eg add_in_objectList(myMission, WayPoints, leaderPlane)
+>eg set_as_objectList(myMission, WayPoints, leaderPlane)
+
+**add_OnReports** : add report, command and target to existing reports for a list of objects
+> reports names are defined for 'planes', 'vehicle','Aerostat', 'ship' and 'MCU_TR_ComplexTrigger' 
+> eg add_OnReports(newMission, vehicle, 'OnTargetAttacked', MCU_CMD_AttackTarget, counter)
+
+**set_OnReports** : set report, command and target for a list of objects. Existing reports are erased.
+> reports names are defined for 'planes', 'vehicle','Aerostat', 'ship' and 'MCU_TR_ComplexTrigger' 
+> eg set_OnReports(newMission, vehicle, 'OnTargetAttacked', MCU_CMD_AttackTarget, counter)
 
 # how to install / use
 to be filled
