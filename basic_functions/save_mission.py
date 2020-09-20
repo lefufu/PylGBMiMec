@@ -1,9 +1,9 @@
 import os
 import shutil
 
-from basic_handling.error_handling import *
-from basic_handling.mission_class import Mission, StrProp, offset
-from basic_handling.object_class import AllObject
+from basic_functions.error_handling import *
+from basic_functions.mission_class import Mission, strProp, offset
+from basic_functions.object_class import AllObject
 
 #header and footer to add in mission file
 from declarations.country import CountryName
@@ -28,9 +28,9 @@ def printGroup(group:AllObject, mission:Mission, filepointer):
     begin = offset(group)
     # Group Header
     line=group.type+'\n{\n'
-    line+=begin+StrProp(NAME, group.PropList[NAME])+'\n'
-    line +=begin+StrProp(INDEX, group.PropList[INDEX])+'\n'
-    line +=begin+ StrProp(DESC, group.PropList[DESC])+'\n'
+    line+= begin + strProp(NAME, group.PropList[NAME]) + '\n'
+    line += begin + strProp(INDEX, group.PropList[INDEX]) + '\n'
+    line += begin + strProp(DESC, group.PropList[DESC]) + '\n'
     if filepointer:
         filepointer.write(line)
     else:
@@ -51,7 +51,7 @@ def printGroup(group:AllObject, mission:Mission, filepointer):
     else:
         print(line)
 # ---------------------------------------------
-def printMission(mission:Mission, filename: str = ''):
+def saveMission(mission:Mission, filename: str = ''):
     """ print contain of a mission in console or in file """
     outputfile = None
     fileflag = 0
@@ -59,7 +59,7 @@ def printMission(mission:Mission, filename: str = ''):
         outputfile = open(filename, 'w')
         outputfile.write(HEADER)
         if not outputfile:
-            CriticalError(CAN_NOT_WRITE_FILE.format(filename))
+            criticalError(CAN_NOT_WRITE_FILE.format(filename))
         fileflag = 1
 
     # copy langage files

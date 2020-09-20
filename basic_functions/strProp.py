@@ -2,7 +2,7 @@
 from declarations.properties_specials import LIST_OF_STRINGS, OBJECTSCRIPT, LISTNAME, COUNTRY
 
 
-def StrProp(propertieName: str, propValue: object) -> str:
+def strProp(propertieName: str, propValue: object) -> str:
     """ convert a propertie into the format used in mission file"""
     convert2str = propertieName
     typeProp = type(propValue)
@@ -40,7 +40,7 @@ def StrProp(propertieName: str, propValue: object) -> str:
             for i in range(len(propValue)):
                 #if propertieName != 'WindLayers' and propertieName != 'Countries' and propertieName != 'Carriages':
                 if propertieName not in LIST_OF_STRINGS:
-                    tmp="\n"+StrProp(propValue[i].Value[LISTNAME],propValue[i].Value)
+                    tmp="\n" + strProp(propValue[i].Value[LISTNAME], propValue[i].Value)
                 else:
                     tmp = propValue[i].Value
                 convert2str += tmp

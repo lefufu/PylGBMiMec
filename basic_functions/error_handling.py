@@ -17,7 +17,8 @@ BAD_FILTER_RANGE ="Error : Invalid Range filter : {0}"
 DOUBLE_RANGE_FILTER = "Error : FromPoint can not be used in findObjectInRange function"
 CAN_NOT_MODIFY_INDEX = "Error : Can not modify Index for object {0}"
 REPORT_NOT_DEFINED_FOR_TYPE = "Error : Report not defined for type {0}"
+EVENT_NOT_DEFINED_FOR_TYPE = "Error : Event not defined for type {0}"
 
 """ handle error """
-def CriticalError(message):
+def criticalError(message):
     raise Exception(message)

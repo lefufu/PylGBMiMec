@@ -1,4 +1,4 @@
-from basic_handling.error_handling import *
+from basic_functions.error_handling import *
 
 
 class Properties:

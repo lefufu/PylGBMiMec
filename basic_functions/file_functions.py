@@ -1,22 +1,21 @@
 """ package containing functions dedicated to file handling, including object formating"""
 import re
 
-from basic_handling.error_handling import *
-#from basic_handling.mission_class import Mission
-from basic_handling.object_class import AllObject
-from basic_handling.properties_class import Properties
+from basic_functions.error_handling import *
+from basic_functions.object_class import AllObject
+from basic_functions.properties_class import Properties
 
 #####################################################################################
 from declarations.properties_specials import WINDLAYERS, COUNTRIES, CARRIAGES, LIST_OF_STRINGS, GROUP, INDEX
 
 
-def ReadPropFromFile(filePointer):
+def readPropFromFile(filePointer):
     """ read properties from file"""
     key = ""
     prop=Properties('')
     line = readLine(filePointer)
     if line == "":
-        CriticalError("unable to read object from file:" + str(filePointer))
+        criticalError("unable to read object from file:" + str(filePointer))
     else:
         # find the kind of properties
         # test if unitary (key = value)
@@ -72,7 +71,7 @@ def ReadPropFromFile(filePointer):
                 elif isFloat:
                     prop.Value = float(value)
                 else:
-                    CriticalError(CAN_NOT_READ_PROPERTIE + "\"" + line + "\"")
+                    criticalError(CAN_NOT_READ_PROPERTIE + "\"" + line + "\"")
 
         elif endOfObject:
             # End Of object: set value to "}" (already the case)
@@ -96,7 +95,7 @@ def ReadPropFromFile(filePointer):
                 else:
                     prop.Value = list()
                 while endOfList == 0:
-                    tempName, tempProp = ReadPropFromFile(filePointer)
+                    tempName, tempProp = readPropFromFile(filePointer)
                     if tempName != "":
                          if isDict:
                              prop.Value[tempName]=tempProp.Value
@@ -109,17 +108,17 @@ def ReadPropFromFile(filePointer):
                         endOfList=1
             else:
                 msg=CAN_NOT_READ_LIST_PROPERTIE.format(line)
-                CriticalError(msg)
+                criticalError(msg)
         else:
-            CriticalError(CAN_NOT_READ_PROPERTIE + line)
+            criticalError(CAN_NOT_READ_PROPERTIE + line)
     return key, prop
 
 #####################################################################################
-def ReadObjectFromFile(filePointer):
+def readObjectFromFile(filePointer):
     """Read object from opened file """
     objectType = getBegining(filePointer)
     if objectType == '':
-        CriticalError(UNABLE_TO_FIND_OBJECT_BEGINING + str(filePointer))
+        criticalError(UNABLE_TO_FIND_OBJECT_BEGINING + str(filePointer))
     else:
         newObject=AllObject()
 
@@ -130,14 +129,14 @@ def ReadObjectFromFile(filePointer):
         # check if next line is "{"
         m = re.search(r"\s*{\s*$", line)
         if not m:
-            CriticalError(UNABLE_TO_READ_OBJECT_FROM_FILE + objectType + " from file:" + str(filePointer))
+            criticalError(UNABLE_TO_READ_OBJECT_FROM_FILE + objectType + " from file:" + str(filePointer))
         else:
             while EndOfObject == 0:
                 # check if end of object
                 # read all properties
-                propName, prop = ReadPropFromFile(filePointer)
+                propName, prop = readPropFromFile(filePointer)
                 if propName != "" and propName != '}':
-                    newObject.AddProp(propName, prop.Value)
+                    newObject.addProp(propName, prop.Value)
                 else:
                     EndOfObject = 1
 
@@ -154,13 +153,13 @@ def ReadObjectFromFile(filePointer):
     return newObject
 
 #####################################################################################
-def ReadGroupFromFile(filePointer, currentlevel:int, mission):
+def readGroupFromFile(filePointer, currentlevel:int, mission):
     """Read object from opened file """
     objectType = getBegining(filePointer)
     if objectType == '':
-        CriticalError(UNABLE_TO_FIND_OBJECT_BEGINING + str(filePointer))
+        criticalError(UNABLE_TO_FIND_OBJECT_BEGINING + str(filePointer))
     elif objectType != GROUP:
-        CriticalError(EXPECTED_GROUP_NOT_FOUND.format(objectType,str(filePointer)))
+        criticalError(EXPECTED_GROUP_NOT_FOUND.format(objectType, str(filePointer)))
     else:
         #process group create object
         newGroup = AllObject()
@@ -169,8 +168,8 @@ def ReadGroupFromFile(filePointer, currentlevel:int, mission):
         line=readLine(filePointer)
         # read 3 lines name, index, Desc
         for i in range(3):
-            propName, prop = ReadPropFromFile(filePointer)
-            newGroup.AddProp(propName, prop.Value)
+            propName, prop = readPropFromFile(filePointer)
+            newGroup.addProp(propName, prop.Value)
         #read and create objects
         endOfGroup = 0
         while endOfGroup == 0 :
@@ -183,18 +182,18 @@ def ReadGroupFromFile(filePointer, currentlevel:int, mission):
                 #skip last '{'
                 line = readLine(filePointer)
             elif objectType != GROUP:
-                newObject=ReadObjectFromFile(filePointer)
-                mission.AddObject(newObject,currentlevel+1)
-                newGroup.AddObject(newObject.getKv(INDEX))
+                newObject=readObjectFromFile(filePointer)
+                mission.addObject(newObject, currentlevel + 1)
+                newGroup.addObject(newObject.getKv(INDEX))
             else:
                 #recurvivelly process groups
-                subGroup=ReadGroupFromFile(filePointer, currentlevel+1, mission)
+                subGroup=readGroupFromFile(filePointer, currentlevel + 1, mission)
                 #mission.AddGroup(subGroup)
-                newGroup.AddObject(subGroup.getKv(INDEX))
+                newGroup.addObject(subGroup.getKv(INDEX))
                 #line=readLine(filePointer)
-                mission.AddObject(subGroup, currentlevel)
+                mission.addObject(subGroup, currentlevel)
         #mission.AddGroup(newGroup,currentlevel)
-        mission.AddObject(newGroup, currentlevel)
+        mission.addObject(newGroup, currentlevel)
 
     return newGroup
 

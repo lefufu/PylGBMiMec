@@ -1,9 +1,10 @@
 #  Contain function do modify list of object
 #  User level :
-from basic_handling.error_handling import *
-from basic_handling.mission_class import Mission, Properties
-from basic_handling.warning_handling import warning_msg, PROP_TO_MODIFY_NOT_EXISTS, ENTITY_NOT_LINKED, \
+from basic_functions.error_handling import *
+from basic_functions.mission_class import Mission, Properties
+from basic_functions.warning_handling import warning_msg, PROP_TO_MODIFY_NOT_EXISTS, ENTITY_NOT_LINKED, \
     PROP_NOT_EXISTING, PROP_NOT_EXISTING_FOR_MOD
+from declarations.envent_definitions import findEvent
 from declarations.properties_specials import ONREPORTS, ONEVENTS, LINKTRID, NAME, INDEX, TYPE, CMDID, TARID, \
     OBJECTSCRIPT, COUNTRIES, COUNTRY, ONREPORT, ONEVENT
 from declarations.report_definitions import findReport
@@ -26,7 +27,7 @@ def modify_kv(mission:Mission, objList:list, **properties):
             if key in mission.ObjList[objIndex].PropList:
                 value=val
                 if key == INDEX:
-                    CriticalError(CAN_NOT_MODIFY_INDEX.format(objIndex))
+                    criticalError(CAN_NOT_MODIFY_INDEX.format(objIndex))
 
                 if callable(val):
                     value=val(mission.ObjList[objIndex])
@@ -55,7 +56,7 @@ def modify_kv(mission:Mission, objList:list, **properties):
     return status
 
 # ---------------------------------------------
-def add_target(mission:Mission, objList:list, targetList:list):
+def add_in_targetList(mission:Mission, objList:list, targetList:list):
     """ add target(s) to object target list
     :param mission: Mission
             mission containing objects to modify
@@ -68,11 +69,11 @@ def add_target(mission:Mission, objList:list, targetList:list):
     status=0
 
     for objID in objList:
-        mission.ObjList[objID].AddTarget(targetList)
+        mission.ObjList[objID].addTarget(targetList)
     return status
 
 # ---------------------------------------------
-def set_as_target(mission: Mission, objList: list, targetList: list):
+def set_as_targetList(mission: Mission, objList: list, targetList: list):
     """ set target(s) to object target  list
     :param mission: Mission
             mission containing objects to modify
@@ -85,13 +86,13 @@ def set_as_target(mission: Mission, objList: list, targetList: list):
     status = 0
 
     for objID in objList:
-        mission.ObjList[objID].SetTarget(targetList)
+        mission.ObjList[objID].setTarget(targetList)
 
     return status
 
 
 # ---------------------------------------------
-def add_in_object(mission: Mission, objList: list, targetList: list):
+def add_in_objectList(mission: Mission, objList: list, targetList: list):
     """ add target(s) to object object list
     :param mission: Mission
             mission containing objects to modify
@@ -104,12 +105,12 @@ def add_in_object(mission: Mission, objList: list, targetList: list):
     status = 0
 
     for objID in objList:
-        mission.ObjList[objID].AddObject(targetList)
+        mission.ObjList[objID].addObject(targetList)
     return status
 
 
 # ---------------------------------------------
-def set_as_object(mission: Mission, objList: list, targetList: list):
+def set_as_objectList(mission: Mission, objList: list, targetList: list):
     """ set target(s) to object object list
     :param mission: Mission
             mission containing objects to modify
@@ -176,10 +177,10 @@ def set_OnReports(mission: Mission, objList: list, reportName:str, commandID:lis
     :param targetID: list
             object ID to use as target, in a list comming from "find object'
 """
-    add_OnReports(mission, objList, reportName, commandID, targetID, 1)
+    add_OnReports(mission, objList, reportName, commandID, targetID, reset=1)
 
 # ---------------------------------------------
-def add_OnEvents(mission: Mission, objList: list, eventName:str, commandID:list, targetID: list, reset=0):
+def add_OnEvents(mission: Mission, objList: list, eventName:str, targetID: list, reset=0):
     """ add targetList objects for event reportNumber of objects objList
     :param mission: Mission
             mission containing objects to modify
@@ -207,8 +208,7 @@ def add_OnEvents(mission: Mission, objList: list, eventName:str, commandID:list,
                 #create a new propertie and add it to the 'OnReports' list
                 prop = Properties('')
                 prop.Value = dict()
-                prop.Value[TYPE] = findReport(mission.ObjList[obj].type, eventName)
-                prop.Value[CMDID] = commandID[0]
+                prop.Value[TYPE] = findEvent(mission.ObjList[obj].type, eventName)
                 prop.Value[TARID] = targetID[0]
                 prop.Value['LIST_NAME;'] = ONEVENT
                 mission.ObjList[linkTrId].PropList[ONEVENTS].append(prop)
@@ -216,7 +216,7 @@ def add_OnEvents(mission: Mission, objList: list, eventName:str, commandID:list,
             warning_msg(ENTITY_NOT_LINKED.format(obj, 'add_OnEvents'))
 
 # ---------------------------------------------
-def set_OnEvents(mission: Mission, objList: list, reportName:str, commandID:list, targetID: list):
+def set_OnEvents(mission: Mission, objList: list, reportName:str, targetID: list):
     """ add targetList objects for event reportNumber of objects objList
     :param mission: Mission
             mission containing objects to modify
@@ -229,7 +229,7 @@ def set_OnEvents(mission: Mission, objList: list, reportName:str, commandID:list
     :param targetID: list
             object ID to use as target, in a list comming from "find object'
 """
-    add_OnEvents(mission, objList, reportName, commandID, targetID, 1)
+    add_OnEvents(mission, objList, reportName, targetID, reset=1)
 
 # ---------------------------------------------
 def add_ObjScriptList(mission: Mission, objList: list, ObjScriptList:list=None, Countries:list=None, reset=0):

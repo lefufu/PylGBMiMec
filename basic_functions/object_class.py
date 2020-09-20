@@ -1,6 +1,6 @@
-from basic_handling.properties_class import *
-from basic_handling.strProp import StrProp
-from basic_handling.warning_handling import warning_msg, DUPLICATE_PROPERTIE
+from basic_functions.properties_class import *
+from basic_functions.strProp import strProp
+from basic_functions.warning_handling import warning_msg, DUPLICATE_PROPERTIE
 from declarations.properties_specials import LINKTRID, COMPLEXTRIGGERCOMMONPROP, OBJECTSCRIPT, TARGETS, OBJECTS, INDEX, \
     NAME, DUPLICATE_CTRIGGER
 
@@ -46,7 +46,7 @@ class AllObject:
         self.PropList = dict()
         self.Level = 0
 # ---------------------------------------------
-    def AddProp(self, propertieName: str, propertieValue: object):
+    def addProp(self, propertieName: str, propertieValue: object):
         """Add a propertie to object (used for create method) """
         if propertieName != OBJECTSCRIPT:
             if propertieName in self.PropList and propertieName not in DUPLICATE_CTRIGGER:
@@ -65,7 +65,7 @@ class AllObject:
         if propertieName in self.PropList:
             return(self.PropList[propertieName])
         else:
-            CriticalError(INVALID_PROP_NAME_FOR_GET.format(propertieName,self))
+            criticalError(INVALID_PROP_NAME_FOR_GET.format(propertieName, self))
  # ---------------------------------------------
     def setKv(self, propertieName: str, value:object) -> object:
         """ set key Value propertie for an Object"""
@@ -81,7 +81,7 @@ class AllObject:
             result=1
         return(result)
 # ---------------------------------------------
-    def AddTarget(self, targetList):
+    def addTarget(self, targetList):
         """ add one ID or a list of ID as targets
         """
         if TARGETS not in self.PropList:
@@ -94,16 +94,16 @@ class AllObject:
         elif type(targetList) is int or type(targetList) is float:
             self.PropList[TARGETS].add(int(targetList))
         else :
-            CriticalError(INVALID_TARGET_TYPE.format(targetList, self))
+            criticalError(INVALID_TARGET_TYPE.format(targetList, self))
 
 # ---------------------------------------------
-    def SetTarget(self, targetList):
+    def setTarget(self, targetList):
         """ set one ID or a list of ID as targets
         """
         self.PropList[TARGETS]=set()
-        self.AddTarget(self, targetList)
+        self.addTarget(self, targetList)
  # ---------------------------------------------
-    def AddObject(self, objectList):
+    def addObject(self, objectList):
         """ add one ID or a list of ID as objects
         """
         if OBJECTS not in self.PropList:
@@ -115,20 +115,20 @@ class AllObject:
         elif type(objectList) is int or type(objectList) is float:
             self.PropList[OBJECTS].add(int(objectList))
         else:
-            CriticalError(INVALID_OBJECT_TYPE.format(objectList, self))
+            criticalError(INVALID_OBJECT_TYPE.format(objectList, self))
 # ---------------------------------------------
     def SetObject(self, objectList):
         """ set one ID or a list of ID as objects
         """
         self.PropList[OBJECTS]=set()
-        self.AddObject(objectList)
+        self.addObject(objectList)
 
 # ---------------------------------------------
     def __str__(self):
         begin=offset(self)
         convert2str = begin+self.type + "\n"+begin+"{"
         for propName in self.PropList:
-            convert2str +="\n"+begin+StrProp(propName, self.PropList[propName])
+            convert2str +="\n" + begin + strProp(propName, self.PropList[propName])
         convert2str +="\n"+ begin+ "}"
         return convert2str
 

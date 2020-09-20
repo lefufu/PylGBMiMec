@@ -4,9 +4,9 @@
 import math
 import re
 from logging import warning
-from basic_handling.mission_class import Mission, INVALID_TYPE_FOR_RANGE, CriticalError, BAD_FILTER_RANGE, rangeGrid, \
+from basic_functions.mission_class import Mission, INVALID_TYPE_FOR_RANGE, criticalError, BAD_FILTER_RANGE, rangeGrid, \
     DOUBLE_RANGE_FILTER
-from basic_handling.warning_handling import PROP_NOT_EXISTING, ONLY_FIRST_OBJECT_USED, warning_msg, EMPTY_CENTER, \
+from basic_functions.warning_handling import PROP_NOT_EXISTING, ONLY_FIRST_OBJECT_USED, warning_msg, EMPTY_CENTER, \
     TYPE_NOT_SUPPORTED_FOR_REQUEST
 
 
@@ -129,7 +129,7 @@ def findObjectInRange(mission:Mission, centerObj:list, Range:int, **parameters):
      """
     filteredList = list()
     if 'FromPoint' in parameters:
-        CriticalError(DOUBLE_RANGE_FILTER)
+        criticalError(DOUBLE_RANGE_FILTER)
     else:
         if len(centerObj) == 0:
             warning_msg(EMPTY_CENTER)
@@ -167,7 +167,7 @@ def filterListOfObject(mission:Mission, objIndexList:list, dictOfFilter:dict ):
                     #handle range criterion
                     rangeprobe=list(val)
                     if len(rangeprobe) == 0:
-                        CriticalError(BAD_FILTER_RANGE.format(val))
+                        criticalError(BAD_FILTER_RANGE.format(val))
                     if isinstance(rangeprobe[0], int) and isinstance(currentProp, int):
                         # do iteration on range
                         fixedRange = list(range(rangeprobe[0], rangeprobe[len(rangeprobe)-1] + 2))
@@ -178,7 +178,7 @@ def filterListOfObject(mission:Mission, objIndexList:list, dictOfFilter:dict ):
                         if currentProp >= rangeprobe[0] and currentProp <= rangeprobe[len(rangeprobe)-1]:
                             criterion += 1
                     else :
-                        CriticalError(INVALID_TYPE_FOR_RANGE.format(type(currentObj.PropList[key]), key, val,currentObj.PropList[NAME]))
+                        criticalError(INVALID_TYPE_FOR_RANGE.format(type(currentObj.PropList[key]), key, val, currentObj.PropList[NAME]))
                 else:
                     #handle direct comparison or list scanning
                     #unitary value

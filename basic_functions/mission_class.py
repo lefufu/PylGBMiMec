@@ -1,8 +1,8 @@
 #from typing import List, Any
-from basic_handling.file_functions import getBegining, ReadGroupFromFile, ReadObjectFromFile, readLine
-from basic_handling.object_class import *
-#from basic_handling.properties_class import *
-#from basic_handling.functions_file import *
+from basic_functions.file_functions import getBegining, readGroupFromFile, readObjectFromFile, readLine
+from basic_functions.object_class import *
+#from basic_functions.properties_class import *
+#from basic_functions.functions_file import *
 from declarations import *
 from declarations.map_size import *
 from declarations.properties_specials import GUIMAP, OPTIONS, GROUP, XPOS, ZPOS
@@ -40,7 +40,7 @@ class Mission:
 
     Methods
     -------
-    AddObject
+    addObject
     add a new object to mission
     """
 
@@ -68,7 +68,7 @@ class Mission:
         return convert2str
 
 # ---------------------------------------------
-    def AddObject(self, Object:AllObject, level:int=0):
+    def addObject(self, Object:AllObject, level:int=0):
         """add an object to the mission object list"""
         if Object.type != OPTIONS:
             # Add object to object list
@@ -115,16 +115,16 @@ class Mission:
                     self.splitNB = SPLIT_MAP
                     mapFound = 1
             if not mapFound:
-                CriticalError(MAP_NOT_FOUND.format(mapName))
+                criticalError(MAP_NOT_FOUND.format(mapName))
 
 #---------------------------------------------
 #TODO : delete object
 #---------------------------------------------
-def ReadMissionFromFile(mission:Mission, fileName: str) -> object:
+def readMissionFromFile(mission:Mission, fileName: str) -> object:
         """ Read mission from IL2 GB .mission file"""
         filePointer=open(fileName)
         if not filePointer:
-            CriticalError(CAN_NOT_OPEN_FILE.format(fileName))
+            criticalError(CAN_NOT_OPEN_FILE.format(fileName))
         mission.FileName=fileName
         #get first object type
         last_pos = filePointer.tell()
@@ -133,7 +133,7 @@ def ReadMissionFromFile(mission:Mission, fileName: str) -> object:
 
         #must start by "Options"
         if objectType != OPTIONS:
-            CriticalError(MISSION_FILE_WITHOUT_OPTION)
+            criticalError(MISSION_FILE_WITHOUT_OPTION)
         else:
             #read all objects
             endOfFile=0
@@ -142,10 +142,10 @@ def ReadMissionFromFile(mission:Mission, fileName: str) -> object:
                 objectType = getBegining(filePointer)
                 filePointer.seek(last_pos)
                 if objectType == GROUP:
-                    ReadGroupFromFile(filePointer, 0, mission)
+                    readGroupFromFile(filePointer, 0, mission)
                 elif objectType !='':
-                    newObject=ReadObjectFromFile(filePointer)
-                    mission.AddObject(newObject)
+                    newObject=readObjectFromFile(filePointer)
+                    mission.addObject(newObject)
                 else:
                    endOfFile=1
 
