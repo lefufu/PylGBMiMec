@@ -7,9 +7,9 @@ The IL2 mission editor is powerfull, but the mechanics of mission involve creati
 The mid term target of MiMec is to remove as most as possible MCU and link creation of the 3D editor, and put all the mission logic into python program.
 Currently it will allow you to load a mission, search and modify by lot any mission objects then save the mission into a new one.
 The following use case can be already done with few python lines:
-> change height of some objects (planes, vehicle, blocks, Waypoint) by adding 50m for example.
-> set country of all block around a given position or an object
-> update Complex Trigger to replace planes/vehicules scripts and country (usefull if you import AA group that were not design for the plane of the current mission)  
+* change height of some objects (planes, vehicle, blocks, Waypoint) by adding 50m for example.
+* set country of all block around a given position or an object
+* update Complex Trigger to replace planes/vehicules scripts and country (usefull if you import AA group that were not design for the plane of the current mission)  
 
 # Main functions
 The functions will be detailled in the wiki (to be done for the moment)
