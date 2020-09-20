@@ -3,7 +3,13 @@
 
 # What is Pyl2GB MiMec ?
 A python library to automatize some painfull processes in IL2 GB mission creation.
-It will allow you to load a mission, search and modify by lot any mission objects then save the mission into a new one.
+The IL2 mission editor is powerfull, but the mechanics of mission involve creation of lot of "MCU" and link (target, object, OnReports, OnEvents,...) between objects that make things quite complicated, especially if you want to modify/update mission. The group feature is powerfull but may be aslo cumbersome if you want to update things that are spared between groups.
+The mid term target of MiMec is to remove as most as possible MCU and link creation of the 3D editor, and put all the mission logic into python program.
+Currently it will allow you to load a mission, search and modify by lot any mission objects then save the mission into a new one.
+The following use case can be already done with few python lines:
+> change height of some objects (planes, vehicle, blocks, Waypoint) by adding 50m for example.
+> set country of all block around a given position or an object
+> update Complex Trigger to replace planes/vehicules scripts and country (usefull if you import AA group that were not design for the plane of the current mission)  
 
 # Main functions
 ## Read mission file
@@ -52,5 +58,23 @@ It will allow you to load a mission, search and modify by lot any mission object
 > event names are defined for 'planes', 'vehicle','Aerostat', 'ship' and 'MCU_TR_ComplexTrigger' 
 > eg set_OnEvents(newMission, flightGreen, 'OnPlaneBingoMainMG', MCU_CMD_RTB)
 
+**add_ObjScriptList** : add models (scripts) and countries to "script list" of a complex MCU trigger
+> a table is given to add Countries by their names instead of their number
+> if only country or script is used, only the corresponding part will be modified
+> eg set_ObjScriptList(newMission, ctrigger, ObjScriptList=['luascripts\\worldobjects\\planes\\bf109g4.txt', 'luascripts\\worldobjects\\planes\\p40e1.txt'])
+
+**set_ObjScriptList** : set models (scripts) and countries to "script list" of a complex MCU trigger. Existing scripts and countries are erased
+> if only country or script is used, only the corresponding part will be modified
+eg set_ObjScriptList(newMission, ctrigger, Countries=[CountryID['United States'], CountryID['Germany']])
+
+## View objects
+**scanObjectList** : return as sting some properties, given in parameter, of a list of object. It can be printed by command print for debugging/control purpose.
+> eg print(scanObjectList(newMission, ctrigger, 'Name', 'Type', 'LinkTrId','ObjectScript','Country'))
+
+## Save Mission
+**saveMission** : save the results of all operations into a new mission, given by tis name. 
+> The name can be a full path (eg F:\game\IL2\data\Missions\MyMission.Mission) but "\" must be doubled
+> All localization files (.eng, .fra,..) of the original mission will be copied accordingly to the new name.
+> eg saveMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_mini.Mission")
 # how to install / use
-to be filled
+Donwload and install python 3.x from [python.org](https://www.python.org/downloads/windows/)
