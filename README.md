@@ -76,5 +76,19 @@ eg set_ObjScriptList(newMission, ctrigger, Countries=[CountryID['United States']
 > The name can be a full path (eg F:\game\IL2\data\Missions\MyMission.Mission) but "\" must be doubled
 > All localization files (.eng, .fra,..) of the original mission will be copied accordingly to the new name.
 > eg saveMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_mini.Mission")
+
 # how to install / use
-Donwload and install python 3.x from [python.org](https://www.python.org/downloads/windows/)
+## Installation
+* Download and install python 3.x from [python.org](https://www.python.org/downloads/windows/)
+> if you are using an IDE, you should know how to integrate MiMec code in it without installign again python. I can not document for all IDE.
+**Do not forget to add python in the path, this should be an installation option. You will need it to lauch MiMec**
+* get the last release on [gitHub](https://github.com/lefufu/PylGBMiMec/releases) and unzip it somewhere on your PC
+## Usage
+* go to the place where you unzipped MiMec
+* copy the "template_mission.py" to a name accordingly to your mission. The name must end by .py. By example, let's say you will call it "test.py"
+* modify the copied file to add your needs
+* open a MSDOS command and go to the place where you unzipped MiMec
+* type **python** and the name of your modified python file.
+> eg python test.py
+* it should launch the python, and generate the new mission file as set in the "saveMission" command.
+
