@@ -37,12 +37,20 @@ It will allow you to load a mission, search and modify by lot any mission object
 >eg set_as_objectList(myMission, WayPoints, leaderPlane)
 
 **add_OnReports** : add report, command and target to existing reports for a list of objects
-> reports names are defined for 'planes', 'vehicle','Aerostat', 'ship' and 'MCU_TR_ComplexTrigger' 
+> reports names are defined for 'planes', 'vehicle','Aerostat', 'ship'
 > eg add_OnReports(newMission, vehicle, 'OnTargetAttacked', MCU_CMD_AttackTarget, counter)
 
 **set_OnReports** : set report, command and target for a list of objects. Existing reports are erased.
-> reports names are defined for 'planes', 'vehicle','Aerostat', 'ship' and 'MCU_TR_ComplexTrigger' 
+> reports names are defined for 'planes', 'vehicle', 'Aerostat', 'ship'
 > eg set_OnReports(newMission, vehicle, 'OnTargetAttacked', MCU_CMD_AttackTarget, counter)
+
+**add_OnEvents** : add event, command and target to existing reports for a list of objects
+> events names are defined for 'planes', 'vehicle','Aerostat', 'ship' and 'MCU_TR_ComplexTrigger' 
+> eg add_OnEvents(newMission, flightGreen, 'OnPlaneBingoMainMG', MCU_CMD_RTB)
+
+**set_OnEvents** : set event, command and target for a list of objects. Existing reports are erased.
+> event names are defined for 'planes', 'vehicle','Aerostat', 'ship' and 'MCU_TR_ComplexTrigger' 
+> eg set_OnEvents(newMission, flightGreen, 'OnPlaneBingoMainMG', MCU_CMD_RTB)
 
 # how to install / use
 to be filled
