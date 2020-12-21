@@ -42,7 +42,7 @@ def readPropFromFile(filePointer):
             # string value
             isString = re.search(r"^\s*\"\s*", value)
             isTime = re.search(r"^\s*[0-9]{1,2}\:[0-9]{1,2}\:[0-9]{1,2}$", value)
-            isDate = re.search(r"^\s*[0-9]{1,2}.\.[0-9]{1,2}\.[0-9]{4}$", value)
+            isDate = re.search(r"^\s*[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$", value)
             isArray = re.search(r"^\[[0-9,.\"\w\s]*\]$", value)
 
             if isString or isTime or isDate:
