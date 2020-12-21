@@ -1,5 +1,5 @@
 #####################################################################################
-from declarations.properties_specials import LIST_OF_STRINGS, OBJECTSCRIPT, LISTNAME, COUNTRY
+from declarations.properties_specials import LIST_OF_STRINGS, OBJECTSCRIPT, LISTNAME, COUNTRY, MULTIPLAYERPLANECONFIG
 
 
 def strProp(propertieName: str, propValue: object) -> str:
@@ -32,7 +32,7 @@ def strProp(propertieName: str, propValue: object) -> str:
         convert2str += "\n}"
     # LIST
     if typeProp == list:
-        if propertieName != OBJECTSCRIPT and propertieName != COUNTRY :
+        if propertieName != OBJECTSCRIPT and propertieName != COUNTRY and propertieName != MULTIPLAYERPLANECONFIG:
             convert2str += "\n{"
             #if propertieName == 'WindLayers' or propertieName == 'Countries' or propertieName == 'Carriages':
             if propertieName in LIST_OF_STRINGS:

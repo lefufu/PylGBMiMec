@@ -2,7 +2,7 @@ from basic_functions.properties_class import *
 from basic_functions.strProp import strProp
 from basic_functions.warning_handling import warning_msg, DUPLICATE_PROPERTIE
 from declarations.properties_specials import LINKTRID, COMPLEXTRIGGERCOMMONPROP, OBJECTSCRIPT, TARGETS, OBJECTS, INDEX, \
-    NAME, DUPLICATE_CTRIGGER
+    NAME, DUPLICATE_CTRIGGER, MULTIPLAYERPLANECONFIG
 
 
 class AllObject:
@@ -48,16 +48,16 @@ class AllObject:
 # ---------------------------------------------
     def addProp(self, propertieName: str, propertieValue: object):
         """Add a propertie to object (used for create method) """
-        if propertieName != OBJECTSCRIPT:
+        if propertieName != OBJECTSCRIPT and propertieName != MULTIPLAYERPLANECONFIG:
             if propertieName in self.PropList and propertieName not in DUPLICATE_CTRIGGER:
                 warning_msg(DUPLICATE_PROPERTIE.format(propertieName, self.PropList[INDEX]))
             else:
                 self.PropList[propertieName]=propertieValue
         else:
-            # handle multiple "ObjectScript" lines for complex MCU => should be tupple ?
-            if OBJECTSCRIPT not in self.PropList:
-                self.PropList[OBJECTSCRIPT]=list()
-            self.PropList[OBJECTSCRIPT].append(propertieValue)
+            # handle multiple "ObjectScript" or "MultiplayerPlaneConfig"
+            if propertieName not in self.PropList:
+                self.PropList[propertieName]=list()
+            self.PropList[propertieName].append(propertieValue)
 
 # ---------------------------------------------
     def getKv(self, propertieName: str) -> object:
