@@ -102,6 +102,15 @@ class AllObject:
         """
         self.PropList[TARGETS]=set()
         self.addTarget(self, targetList)
+
+    # ---------------------------------------------
+    def getTarget(self):
+        """ set one ID or a list of ID as targets
+        """
+        targetList=list()
+        if TARGETS in self.PropList:
+            targetList = self.PropList[TARGETS].copy()
+        return targetList
  # ---------------------------------------------
     def addObject(self, objectList):
         """ add one ID or a list of ID as objects
@@ -122,6 +131,15 @@ class AllObject:
         """
         self.PropList[OBJECTS]=set()
         self.addObject(objectList)
+
+    # ---------------------------------------------
+    def getObject(self):
+        """ set one ID or a list of ID as targets
+        """
+        objectList=list()
+        if OBJECTS in self.PropList:
+            objectList = self.PropList[OBJECTS].copy()
+        return objectList
 
 # ---------------------------------------------
     def __str__(self):

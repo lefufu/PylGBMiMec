@@ -9,12 +9,10 @@ from basic_functions.mission_class import Mission, INVALID_TYPE_FOR_RANGE, criti
 from basic_functions.warning_handling import PROP_NOT_EXISTING, ONLY_FIRST_OBJECT_USED, warning_msg, EMPTY_CENTER, \
     TYPE_NOT_SUPPORTED_FOR_REQUEST
 
-
-# ---------------------------------------------
 from declarations.properties_specials import XPOS, ZPOS, TYPE, GROUP, INDEX, NAME, OBJECTSCRIPT, OBJECTS, \
     EXCEPTION_FOR_FILTER
 
-
+# ---------------------------------------------
 def findObject(mission:Mission, **parameters ):
     """find objects of a mission by using multiple criterion on parameters
             :param mission: Mission
@@ -237,3 +235,22 @@ def printObjects(mission:Mission, objectList:list):
         print(mission.ObjList[objIndex])
 
     return
+
+# ---------------------------------------------
+def findGroupByName(mission:Mission, GroupName:str):
+    """find group of a mission by using name
+           :param mission: Mission
+           mission containing objects to search
+           :param GroupName: str
+           name of group to find
+            :return list:
+            list of group ID that fullfill criterions (should be one)
+    """
+    resultlist = list()
+
+    for idGroup in mission.ObjIndex['Group']['00']:
+        temp=mission.ObjList[idGroup].PropList['Name'].replace('\"','')
+        if temp == GroupName:
+            resultlist.append(idGroup)
+
+    return resultlist

@@ -70,10 +70,14 @@ class Mission:
 # ---------------------------------------------
     def addObject(self, Object:AllObject, level:int=0):
         """add an object to the mission object list"""
+
         if Object.type != OPTIONS:
+            #TODO: implement group handling (not working)
+
             # Add object to object list
             objIndex = Object.getKv(INDEX)
             self.ObjList[objIndex] = Object
+
             if level != 0:
                 Object.Level=level
             #add object to index list

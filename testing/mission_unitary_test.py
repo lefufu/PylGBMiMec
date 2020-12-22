@@ -6,6 +6,7 @@
 from basic_functions.mission_class import *
 from basic_functions.find_object import *
 from basic_functions.modify_object import *
+from basic_functions.object_creation import copy_from_mission
 from basic_functions.save_mission import *
 from declarations.country import *
 
@@ -18,6 +19,13 @@ newMission=Mission()
 #readMissionFromFile(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\MyMission.Mission")
 readMissionFromFile(newMission, "MyMission.Mission")
 print(newMission)
+
+print("\n******************")
+print('copy object features')
+defautlObjects=Mission()
+readMissionFromFile(defautlObjects, "..\\declarations\\default_objets.Mission")
+#print(defautlObjects)
+newID=copy_from_mission(newMission, defautlObjects, 'Group3', Name='Vehicle')
 
 print("\n******************")
 print('find object by name ')
@@ -67,6 +75,7 @@ print(scanObjectList(newMission, ctrigger, 'Name', 'Type', 'LinkTrId','ObjectScr
 set_ObjScriptList(newMission, ctrigger, ObjScriptList=['luascripts\\worldobjects\\planes\\bf109g4.txt', 'luascripts\\worldobjects\\planes\\p40e1.txt'])
 set_ObjScriptList(newMission, ctrigger, Countries=[CountryID['United States'], CountryID['Germany']])
 print(scanObjectList(newMission, ctrigger, 'Name', 'Type', 'LinkTrId','ObjectScript','Country'))
+
 print("\n******************")
 print('write modified mission')
 #saveMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_mini.Mission")
@@ -87,3 +96,8 @@ print('write modified mission')
 #saveMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\test_Vluki.Mission")
 saveMission(newMission, "test_Vluki.Mission")
 
+#testing for coop mission
+print("***************************************")
+print("Testing COOP Mission")
+readMissionFromFile(newMission, "SYN-Coop05.Mission")
+saveMission(newMission, "test_coop.Mission")

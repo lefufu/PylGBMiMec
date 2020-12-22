@@ -14,6 +14,21 @@ class Properties:
         """
         self.Value = value
 
+    # ---------------------------------------------
+    def copy(self) -> object:
+        """ copy property into a new one
+        """
+        newProp=Properties()
+        if type(self) == int or type(self) == float or type(self) == str:
+            newProp=self.Value
+        if type(self) == list:
+            newProp=self.Value.copy()
+        if type(self) == set:
+            newProp=self.Value.copy()
+        if type(self) == dict:
+            newProp=self.Value.copy()
+        return newProp
+
 # ---------------------------------------------
     def __str__(self):
             typeProp=type(self.Value)

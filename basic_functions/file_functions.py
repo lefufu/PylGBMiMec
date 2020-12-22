@@ -6,7 +6,7 @@ from basic_functions.object_class import AllObject
 from basic_functions.properties_class import Properties
 
 #####################################################################################
-from declarations.properties_specials import WINDLAYERS, COUNTRIES, CARRIAGES, LIST_OF_STRINGS, GROUP, INDEX
+from declarations.properties_specials import WINDLAYERS, COUNTRIES, CARRIAGES, LIST_OF_STRINGS, GROUP, INDEX, BOUNDARY
 
 
 def readPropFromFile(filePointer):
@@ -25,14 +25,17 @@ def readPropFromFile(filePointer):
         isWindLayer =re.search(r"^\s*[0-9.]*\s*:\s*[0-9.]*\s*:\s*[0-9.]*\s*;$", line)
         isCountries = re.search(r"^\s*[0-9.]*\s*:\s*[0-9.]*\s*;$", line)
         isCarriage = re.search(r"^\s*\"LuaScripts\\WorldObjects\\Trains\\\w*.\w*\"\s*;$", line)
+        isBoundary = re.search(r"^\s*[0-9.]*\s*,\s*[0-9.]*\s*;$", line)
 
-        if isWindLayer or isCountries or isCarriage:
+        if isWindLayer or isCountries or isCarriage or isBoundary:
             if isWindLayer:
                 key = WINDLAYERS
             elif isCountries:
                 key = COUNTRIES
-            else:
+            elif isCarriage:
                 key = CARRIAGES
+            else:
+                key = BOUNDARY
             prop.Value = line
 
         elif keyValue:
@@ -42,6 +45,7 @@ def readPropFromFile(filePointer):
             # string value
             isString = re.search(r"^\s*\"\s*", value)
             isTime = re.search(r"^\s*[0-9]{1,2}\:[0-9]{1,2}\:[0-9]{1,2}$", value)
+            #isDate = re.search(r"^\s*[0-9]{1,2}.\.[0-9]{1,2}\.[0-9]{4}$", value)
             isDate = re.search(r"^\s*[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$", value)
             isArray = re.search(r"^\[[0-9,.\"\w\s]*\]$", value)
 
