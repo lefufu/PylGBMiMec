@@ -68,6 +68,13 @@ The functions will be detailled in the wiki (to be done for the moment)
 > if only country or script is used, only the corresponding part will be modified
 eg set_ObjScriptList(newMission, ctrigger, Countries=[CountryID['United States'], CountryID['Germany']])
 
+## Copy/Delete Objects
+**copy_from_mission** : copy objects fullfilling criterions from a mission to another mission
+> All target/Objects ID are shifted accordingly, MCU can be copyed as "real" objects. Copyed objects can be put directly in a group (which must exists in the destination mission)
+
+**deleteObject** : delete and objects list into a mission
+> Warning, some elements (events/Reports) are not updated, so some issue may remain.
+
 ## View objects
 **scanObjectList** : return as sting some properties, given in parameter, of a list of object. It can be printed by command print for debugging/control purpose.
 > eg print(scanObjectList(newMission, ctrigger, 'Name', 'Type', 'LinkTrId','ObjectScript','Country'))
