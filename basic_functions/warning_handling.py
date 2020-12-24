@@ -8,6 +8,7 @@ EMPTY_CENTER = "Warning : Empty center for FromPoint, criterion can not be fullf
 ENTITY_NOT_LINKED = "Warning : Object {0} has not linked entity, operation {1} can not be fullfilled"
 TYPE_NOT_SUPPORTED_FOR_REQUEST = "Warning : type {0} not supported for request on {1}"
 PROP_NOT_EXISTING_FOR_MOD = "Warning : propertie name {0} not existing for object {1}, modification can not be fullfill"
+INVALID_PROP_NAME_FOR_GET = "Error : Get for Key/value propertie name not existing : \"{0}\" for object: {1}"
 """ handle warning_msg """
 def warning_msg(message):
     print(message)

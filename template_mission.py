@@ -8,6 +8,7 @@ See https://github.com/lefufu/PylGBMiMec/blob/master/README.md
 from basic_functions.mission_class import *
 from basic_functions.find_object import *
 from basic_functions.modify_object import *
+from basic_functions.object_creation import copy_from_mission
 from basic_functions.save_mission import *
 from declarations.country import *
 
@@ -17,6 +18,7 @@ print("PyL2MiMec default template")
 #This entry create the variable that will contain your mission. You can replace "newMission" by the word you want, but you will have to use it in all other commands
 newMission=Mission()
 
+#testing for single player mission
 #The mission is read below
 #You can use full path like "D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\MyMission.Mission")
 #just beware of using "\\" instead of "\" in the path
@@ -78,8 +80,26 @@ ctrigger=findObject(newMission, Type='MCU', ObjectScript='il2m41')
 set_ObjScriptList(newMission, ctrigger, ObjScriptList=['luascripts\\worldobjects\\planes\\bf109g4.txt', 'luascripts\\worldobjects\\planes\\p40e1.txt'])
 set_ObjScriptList(newMission, ctrigger, Countries=[CountryID['United States'], CountryID['Germany']])
 
+#now let's import objects from another mission
+#a reference mission "default_objets" with all object has been created
+#to allow adding "bare" objects for future developement
+#but you can import any object of another mission and put it in the new mission
+#the example below is adding all object of default_objets.Mission named "*Vehicle*" into the group3 of the new mission
+print("\n******************")
+print('copy object features')
+defautlObjects=Mission()
+readMissionFromFile(defautlObjects, "declarations\\default_objets.Mission")
+newID=copy_from_mission(newMission, defautlObjects, 'Group3', Name='Vehicle')
+modify_kv(newMission, newID, Name='Vehicle_Copied_In_Group3' )
+
+#now let's delete object "Plane2_test" in Group1
+print("\n******************")
+print('delete object features')
+objlist=findObject(newMission, Type='Plane', Group='Group1', Name='Plane2_test')
+deleteObject(newMission, objlist)
+
 #Now it's time to save the mission
-print('write modified mission in testing directory as test_mini.Mission. Try to load it with Mission Editor and compare it with MyMission.Mission"')
+print('Modified mission written in \"testing\" directory as \"test_mini.Mission\". Try to load it with Mission Editor and compare it with \"MyMission.Mission\" "')
 saveMission(newMission, "testing\\test_mini.Mission")
 
 

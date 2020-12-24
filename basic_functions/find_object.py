@@ -10,7 +10,8 @@ from basic_functions.warning_handling import PROP_NOT_EXISTING, ONLY_FIRST_OBJEC
     TYPE_NOT_SUPPORTED_FOR_REQUEST
 
 from declarations.properties_specials import XPOS, ZPOS, TYPE, GROUP, INDEX, NAME, OBJECTSCRIPT, OBJECTS, \
-    EXCEPTION_FOR_FILTER
+    EXCEPTION_FOR_FILTER, LINKTRID, TARGETS
+
 
 # ---------------------------------------------
 def findObject(mission:Mission, **parameters ):
@@ -184,13 +185,16 @@ def filterListOfObject(mission:Mission, objIndexList:list, dictOfFilter:dict ):
                         #if mission.ObjList[index].PropList[key] == val:
                         if currentObj.PropList[key] == val:
                             criterion += 1
-                    #handle set (target, object)
+                    #TODO handle set (should be target, object)
                     elif type(currentObj.PropList[key]) == set:
                         if type(val) != int:
                             warning_msg(TYPE_NOT_SUPPORTED_FOR_REQUEST.format(type(val), key))
+                        # object or Target are note referenced by their ID, but by their LINKTRID
+                        if (key == OBJECTS or key == TARGETS) and LINKTRID in mission.ObjList[val].PropList:
+                            val = mission.ObjList[val].PropList[LINKTRID]
                         if val in currentObj.PropList[key]:
                             criterion += 1
-                    #handle tupple : should be only 'ObjectScript'
+                    #TODO handle tupple : should be only 'ObjectScript'
                     elif type(currentObj.PropList[key]) == tuple:
                         if type(val) != str and key == OBJECTSCRIPT:
                             warning_msg(TYPE_NOT_SUPPORTED_FOR_REQUEST.format(type(val), key))

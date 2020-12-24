@@ -31,6 +31,7 @@ def copy_from_mission(destMission:Mission, sourceMission:Mission, groupName=str,
 
     if groupName:
         objlist=findGroupByName(destMission, groupName)
+        print(destMission.ObjList[objlist[0]])
     if len(objlist) > 0:
         groupID = objlist[0]
         level=destMission.ObjList[groupID].Level
@@ -54,7 +55,6 @@ def copy_from_mission(destMission:Mission, sourceMission:Mission, groupName=str,
         if groupID:
             addInGroup(destMission, groupID, newindex)
 
-        #TODO : modify all references to object to take offset into account
         #update  TARGET list
         oldtargetList=sourceObj.getTarget()
         if len(oldtargetList):

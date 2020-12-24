@@ -1,9 +1,6 @@
 #from typing import List, Any
-from basic_functions.file_functions import getBegining, readGroupFromFile, readObjectFromFile, readLine
+from basic_functions.file_functions import getBegining, readGroupFromFile, readObjectFromFile
 from basic_functions.object_class import *
-#from basic_functions.properties_class import *
-#from basic_functions.functions_file import *
-from declarations import *
 from declarations.map_size import *
 from declarations.properties_specials import GUIMAP, OPTIONS, GROUP, XPOS, ZPOS
 
@@ -121,8 +118,34 @@ class Mission:
             if not mapFound:
                 criticalError(MAP_NOT_FOUND.format(mapName))
 
-#---------------------------------------------
-#TODO : delete object
+    # ---------------------------------------------
+    def removeObjectFromIndex(self, objID:int):
+        """remove an object from the index list of the mission
+            :param typeObj: str
+                type of object
+            :param objID: int
+                object ID to remove
+        """
+
+        typeObj=self.ObjList[objID].type
+        for area in self.ObjIndex[typeObj]:
+            if area != 'nb':
+                if objID in self.ObjIndex[typeObj][area]:
+                    self.ObjIndex[typeObj][area].remove(objID)
+        return
+
+    # ---------------------------------------------
+    def removeObjectFromList(self, objID:int):
+        """remove an object from the index list of the mission
+            :param typeObj: str
+                type of object
+            :param objID: int
+                object ID to remove
+        """
+        print(self.ObjList[objID])
+        self.ObjList.pop(objID)
+        return
+
 #---------------------------------------------
 def readMissionFromFile(mission:Mission, fileName: str) -> object:
         """ Read mission from IL2 GB .mission file"""

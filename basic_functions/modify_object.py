@@ -1,6 +1,8 @@
 #  Contain function do modify list of object
 #  User level :
 from basic_functions.error_handling import *
+from basic_functions.find_object import findObject
+from basic_functions.group import findGroup, removeFromGroup
 from basic_functions.mission_class import Mission, Properties
 from basic_functions.warning_handling import warning_msg, PROP_TO_MODIFY_NOT_EXISTS, ENTITY_NOT_LINKED, \
     PROP_NOT_EXISTING, PROP_NOT_EXISTING_FOR_MOD
@@ -36,7 +38,12 @@ def modify_kv(mission:Mission, objList:list, **properties):
                 if type(mission.ObjList[objIndex].PropList[key]) == int:
                     mission.ObjList[objIndex].PropList[key]=int(value)
                 if type(mission.ObjList[objIndex].PropList[key]) == str:
-                    mission.ObjList[objIndex].PropList[key]=str(value)
+                    #check if " is in tring, otherwhise add it
+                    strValue=str(value)
+                    temp = strValue.find('\"')
+                    if temp == -1:
+                        strValue='\"'+strValue+'\"'
+                    mission.ObjList[objIndex].PropList[key]=str(strValue)
 
             elif LINKTRID in mission.ObjList[objIndex].PropList:
                 #test if prop exists in linked entity
@@ -287,3 +294,51 @@ def set_ObjScriptList(mission: Mission, objList: list, ObjScriptList:list=None, 
 
 """
     add_ObjScriptList(mission, objList, ObjScriptList, Countries, reset = 1)
+
+#---------------------------------------------
+#TODO : delete object
+def deleteObject(mission:Mission, objList:list):
+    """ delete a list of object in the mission
+        :param mission: Mission
+            mission containing objects to delete
+        :param objList: list
+            list of object ID to modify
+    """
+
+    for objID in objList:
+        # remove object in groups
+        groupID = findGroup(mission,objID)
+        if groupID:
+            removeFromGroup(mission,groupID,objID)
+
+        linkTrID=mission.ObjList[objID].getKv(LINKTRID)
+
+        # if object is linktrID-ed it can be referecend by other objects
+        if linkTrID:
+            # remove in objects fields of other objects
+            inObjectList=findObject(mission, Objects=objID)
+            for objID2 in inObjectList:
+                obList=mission.ObjList[objID2].PropList['Objects']
+                #field to remove is the LINKTRID and not the object id !
+                obList.discard(linkTrID)
+                mission.ObjList[objID2].SetObject(obList)
+
+            # remove in target fields of other objects
+            inTargetList=findObject(mission, Targets=objID)
+            for objID2 in inTargetList:
+                 objectList=mission.ObjList[objID2].PropList['Targets']
+                 #field to remove is the LINKTRID and not the object id !
+                 objectList.discard(linkTrID)
+                 mission.ObjList[objID2].setTarget(objectList)
+
+        # remove object in objIndex
+        mission.removeObjectFromIndex(objID)
+
+        # remove linktrID
+        if linkTrID:
+            deleteObject(mission,[linkTrID])
+
+        # remove object in mission ObjList
+        mission.removeObjectFromList(objID)
+
+    return

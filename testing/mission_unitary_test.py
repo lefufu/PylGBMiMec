@@ -10,10 +10,6 @@ from basic_functions.object_creation import copy_from_mission
 from basic_functions.save_mission import *
 from declarations.country import *
 
-#readMissionFromFile(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\_gen.Mission")
-#saveMission(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\testMission2.Mission")
-#readMissionFromFile(newMission,r"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\Velikiye Luki tutorial finished.Mission")
-
 print("test on simple mission")
 newMission=Mission()
 #readMissionFromFile(newMission,"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\MyMission.Mission")
@@ -21,10 +17,14 @@ readMissionFromFile(newMission, "MyMission.Mission")
 print(newMission)
 
 print("\n******************")
+print('delete object features')
+objlist=findObject(newMission, Type='Plane', Group='Group1', Name='Plane2')
+deleteObject(newMission, objlist)
+
+print("\n******************")
 print('copy object features')
 defautlObjects=Mission()
 readMissionFromFile(defautlObjects, "..\\declarations\\default_objets.Mission")
-#print(defautlObjects)
 newID=copy_from_mission(newMission, defautlObjects, 'Group3', Name='Vehicle')
 
 print("\n******************")

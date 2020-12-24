@@ -1,6 +1,6 @@
 from basic_functions.properties_class import *
 from basic_functions.strProp import strProp
-from basic_functions.warning_handling import warning_msg, DUPLICATE_PROPERTIE
+from basic_functions.warning_handling import warning_msg, DUPLICATE_PROPERTIE, INVALID_PROP_NAME_FOR_GET
 from declarations.properties_specials import LINKTRID, COMPLEXTRIGGERCOMMONPROP, OBJECTSCRIPT, TARGETS, OBJECTS, INDEX, \
     NAME, DUPLICATE_CTRIGGER, MULTIPLAYERPLANECONFIG
 
@@ -65,7 +65,7 @@ class AllObject:
         if propertieName in self.PropList:
             return(self.PropList[propertieName])
         else:
-            criticalError(INVALID_PROP_NAME_FOR_GET.format(propertieName, self))
+            warning_msg(INVALID_PROP_NAME_FOR_GET.format(propertieName, self))
  # ---------------------------------------------
     def setKv(self, propertieName: str, value:object) -> object:
         """ set key Value propertie for an Object"""
@@ -101,7 +101,8 @@ class AllObject:
         """ set one ID or a list of ID as targets
         """
         self.PropList[TARGETS]=set()
-        self.addTarget(self, targetList)
+        if len(objectList) != 0:
+            self.addTarget(self, targetList)
 
     # ---------------------------------------------
     def getTarget(self):
@@ -130,7 +131,8 @@ class AllObject:
         """ set one ID or a list of ID as objects
         """
         self.PropList[OBJECTS]=set()
-        self.addObject(objectList)
+        if len(objectList) != 0:
+            self.addObject(objectList)
 
     # ---------------------------------------------
     def getObject(self):
