@@ -1,0 +1,14 @@
+dist/
+build/
+pylgb_mimec.egg-info/
+testing/test_mini.Mission
+testing/test_mini.chs
+testing/test_mini.eng
+testing/test_mini.fra
+testing/test_mini.ger
+testing/test_mini.list
+testing/test_mini.pol
+testing/test_mini.rus
+testing/test_mini.spa
+.idea/
+**/__pycache__/
