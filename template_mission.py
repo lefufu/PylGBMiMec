@@ -5,12 +5,12 @@ See https://github.com/lefufu/PylGBMiMec/blob/master/README.md
  """
 # Lines started with "#" are comment
 # DO NOT MODIFY the line below, they are needed to make the python working
-from basic_functions.mission_class import *
-from basic_functions.find_object import *
-from basic_functions.modify_object import *
-from basic_functions.object_creation import copy_from_mission
-from basic_functions.save_mission import *
-from declarations.country import *
+from pylgbmimec.basic_functions.mission_class import *
+from pylgbmimec.basic_functions.find_object import *
+from pylgbmimec.basic_functions.modify_object import *
+from pylgbmimec.basic_functions.object_creation import copy_from_mission
+from pylgbmimec.basic_functions.save_mission import *
+from pylgbmimec.declarations.country import *
 
 #You can print messages on console by using "print" command as below
 print("PyL2MiMec default template")
@@ -88,7 +88,7 @@ set_ObjScriptList(newMission, ctrigger, Countries=[CountryID['United States'], C
 print("\n******************")
 print('copy object features')
 defautlObjects=Mission()
-readMissionFromFile(defautlObjects, "declarations\\default_objets.Mission")
+readMissionFromFile(defautlObjects, "pylgbmimec\\declarations\\default_objets.Mission")
 newID=copy_from_mission(newMission, defautlObjects, 'Group3', Name='Vehicle')
 modify_kv(newMission, newID, Name='Vehicle_Copied_In_Group3' )
 

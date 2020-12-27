@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="pylgb_mimec", # Replace with your own username
+    name="pylgbmimec", # Replace with your own username
     version="3.0",
     author="lefufu",
     author_email="author@example.com",

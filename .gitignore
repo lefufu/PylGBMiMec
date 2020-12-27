@@ -1,6 +1,6 @@
 dist/
 build/
-pylgb_mimec.egg-info/
+pylgbmimec.egg-info/
 testing/test_mini.Mission
 testing/test_mini.chs
 testing/test_mini.eng
@@ -10,5 +10,16 @@ testing/test_mini.list
 testing/test_mini.pol
 testing/test_mini.rus
 testing/test_mini.spa
+testing/test_Vluki.Mission
+testing/test_Vluki.chs
+testing/test_Vluki.eng
+testing/test_Vluki.fra
+testing/test_Vluki.ger
+testing/test_Vluki.list
+testing/test_Vluki.pol
+testing/test_Vluki.rus
+testing/test_Vluki.spa
+testing/test_coop.Mission
+testing/test_coop.eng
 .idea/
 **/__pycache__/

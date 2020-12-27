@@ -2,13 +2,12 @@
     Read and print group and objects from a simple mission test file
  """
 #TODO deplace files in local DIRECTORY
-
-from basic_functions.mission_class import *
-from basic_functions.find_object import *
-from basic_functions.modify_object import *
-from basic_functions.object_creation import copy_from_mission
-from basic_functions.save_mission import *
-from declarations.country import *
+from pylgbmimec.basic_functions.mission_class import *
+from pylgbmimec.basic_functions.find_object import *
+from pylgbmimec.basic_functions.modify_object import *
+from pylgbmimec.basic_functions.object_creation import copy_from_mission
+from pylgbmimec.basic_functions.save_mission import *
+from pylgbmimec.declarations.country import *
 
 print("test on simple mission")
 newMission=Mission()
@@ -24,7 +23,7 @@ deleteObject(newMission, objlist)
 print("\n******************")
 print('copy object features')
 defautlObjects=Mission()
-readMissionFromFile(defautlObjects, "..\\declarations\\default_objets.Mission")
+readMissionFromFile(defautlObjects, "..\\pylgbmimec\\declarations\\default_objets.Mission")
 newID=copy_from_mission(newMission, defautlObjects, 'Group3', Name='Vehicle')
 
 print("\n******************")
