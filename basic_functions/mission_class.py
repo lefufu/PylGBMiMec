@@ -146,6 +146,14 @@ class Mission:
         self.ObjList.pop(objID)
         return
 
+    # ---------------------------------------------
+    def setWindLayer(self, new_wind_layer_dictionary: dict):
+        for i, altitude in enumerate([0, 500, 1000, 2000, 5000]):
+            direction = new_wind_layer_dictionary[altitude]['direction']
+            speed = new_wind_layer_dictionary[altitude]['speed']
+            new_value = '    {0} :     {1} :     {2};\n'.format(altitude, direction, speed)
+            self.ObjList[0].PropList['WindLayers'][i].Value = new_value
+        return
 #---------------------------------------------
 def readMissionFromFile(mission:Mission, fileName: str) -> object:
         """ Read mission from IL2 GB .mission file"""

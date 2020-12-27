@@ -98,6 +98,14 @@ print('delete object features')
 objlist=findObject(newMission, Type='Plane', Group='Group1', Name='Plane2_test')
 deleteObject(newMission, objlist)
 
+#now let's change the wind layers (direction and speed at different altitudes)
+new_wind_layer_dictionary = {0: {'direction': 180, 'speed': 2},
+                           500: {'direction': 185, 'speed': 3},
+                           1000: {'direction': 178, 'speed': 4},
+                           2000: {'direction': 161, 'speed': 5},
+                           5000: {'direction': 155, 'speed': 6}}
+newMission.setWindLayer(new_wind_layer_dictionary)
+
 #Now it's time to save the mission
 print('Modified mission written in \"testing\" directory as \"test_mini.Mission\". Try to load it with Mission Editor and compare it with \"MyMission.Mission\" "')
 saveMission(newMission, "testing\\test_mini.Mission")
