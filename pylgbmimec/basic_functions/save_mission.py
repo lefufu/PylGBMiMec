@@ -1,14 +1,14 @@
 import os
 import shutil
 
-from basic_functions.error_handling import *
-from basic_functions.mission_class import Mission, strProp, offset
-from basic_functions.object_class import AllObject
+from .error_handling import *
+from .mission_class import Mission, strProp, offset
+from .object_class import AllObject
 
 #header and footer to add in mission file
-from declarations.country import CountryName
-from declarations.file_extentions import LANG_FILE_EXT
-from declarations.properties_specials import NAME, INDEX, DESC, GROUP, COUNTRY
+from ..declarations.country import CountryName
+from ..declarations.file_extentions import LANG_FILE_EXT
+from ..declarations.properties_specials import NAME, INDEX, DESC, GROUP, COUNTRY
 
 HEADER = "# Mission File Version = 1.0;\n"
 FOOTER = "\n# end of file"

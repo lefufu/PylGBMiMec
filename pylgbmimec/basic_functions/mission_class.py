@@ -1,8 +1,8 @@
 #from typing import List, Any
-from basic_functions.file_functions import getBegining, readGroupFromFile, readObjectFromFile
-from basic_functions.object_class import *
-from declarations.map_size import *
-from declarations.properties_specials import GUIMAP, OPTIONS, GROUP, XPOS, ZPOS
+from .file_functions import getBegining, readGroupFromFile, readObjectFromFile
+from .object_class import *
+from ..declarations.map_size import *
+from ..declarations.properties_specials import GUIMAP, OPTIONS, GROUP, XPOS, ZPOS
 
 class Mission:
     """Mission Class, contain an array of AllObject objects

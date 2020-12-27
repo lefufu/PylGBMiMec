@@ -1,15 +1,15 @@
 #  Contain function do modify list of object
 #  User level :
-from basic_functions.error_handling import *
-from basic_functions.find_object import findObject
-from basic_functions.group import findGroup, removeFromGroup
-from basic_functions.mission_class import Mission, Properties
-from basic_functions.warning_handling import warning_msg, PROP_TO_MODIFY_NOT_EXISTS, ENTITY_NOT_LINKED, \
+from .error_handling import *
+from .find_object import findObject
+from .group import findGroup, removeFromGroup
+from .mission_class import Mission, Properties
+from .warning_handling import warning_msg, PROP_TO_MODIFY_NOT_EXISTS, ENTITY_NOT_LINKED, \
     PROP_NOT_EXISTING, PROP_NOT_EXISTING_FOR_MOD
-from declarations.envent_definitions import findEvent
-from declarations.properties_specials import ONREPORTS, ONEVENTS, LINKTRID, NAME, INDEX, TYPE, CMDID, TARID, \
+from ..declarations.envent_definitions import findEvent
+from ..declarations.properties_specials import ONREPORTS, ONEVENTS, LINKTRID, NAME, INDEX, TYPE, CMDID, TARID, \
     OBJECTSCRIPT, COUNTRIES, COUNTRY, ONREPORT, ONEVENT
-from declarations.report_definitions import findReport
+from ..declarations.report_definitions import findReport
 
 # ---------------------------------------------
 def modify_kv(mission:Mission, objList:list, **properties):

@@ -1,4 +1,4 @@
-from basic_functions.error_handling import criticalError, REPORT_NOT_DEFINED_FOR_TYPE, EVENT_NOT_DEFINED_FOR_TYPE
+from ..basic_functions.error_handling import criticalError, REPORT_NOT_DEFINED_FOR_TYPE, EVENT_NOT_DEFINED_FOR_TYPE
 
 """ definition of event name and ID to ease their use"""
 

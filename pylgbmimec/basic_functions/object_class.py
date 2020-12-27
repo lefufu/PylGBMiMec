@@ -1,7 +1,7 @@
-from basic_functions.properties_class import *
-from basic_functions.strProp import strProp
-from basic_functions.warning_handling import warning_msg, DUPLICATE_PROPERTIE, INVALID_PROP_NAME_FOR_GET
-from declarations.properties_specials import LINKTRID, COMPLEXTRIGGERCOMMONPROP, OBJECTSCRIPT, TARGETS, OBJECTS, INDEX, \
+from .properties_class import *
+from .strProp import strProp
+from .warning_handling import warning_msg, DUPLICATE_PROPERTIE, INVALID_PROP_NAME_FOR_GET
+from ..declarations.properties_specials import LINKTRID, COMPLEXTRIGGERCOMMONPROP, OBJECTSCRIPT, TARGETS, OBJECTS, INDEX, \
     NAME, DUPLICATE_CTRIGGER, MULTIPLAYERPLANECONFIG
 
 

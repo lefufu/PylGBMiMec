@@ -1,6 +1,6 @@
 #  Contain function do add or remove objects in groups
 
-from basic_functions.mission_class import Mission
+from .mission_class import Mission
 
 # ---------------------------------------------
 def addInGroup(mission:Mission, groupID:int, objlist:list):

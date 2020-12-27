@@ -1,5 +1,5 @@
 #####################################################################################
-from declarations.properties_specials import LIST_OF_STRINGS, OBJECTSCRIPT, LISTNAME, COUNTRY, MULTIPLAYERPLANECONFIG
+from ..declarations.properties_specials import LIST_OF_STRINGS, OBJECTSCRIPT, LISTNAME, COUNTRY, MULTIPLAYERPLANECONFIG
 
 
 def strProp(propertieName: str, propValue: object) -> str:
