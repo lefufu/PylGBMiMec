@@ -91,7 +91,7 @@ eg set_ObjScriptList(newMission, ctrigger, Countries=[CountryID['United States']
 > if you are using an IDE, you should know how to integrate MiMec code in it without installign again python. I can not document for all IDE.
 **Do not forget to add python in the path, this should be an installation option. You will need it to lauch MiMec**
 * get the last release on [gitHub](https://github.com/lefufu/PylGBMiMec/releases) and unzip it somewhere on your PC
-* cd to the root folder PylGBMiMec and install:
+* (optional) if you want to install the package in your python environment, cd to the root folder PylGBMiMec and install:
 ```
 python setup.py install
 ```
