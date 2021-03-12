@@ -1,12 +1,12 @@
 """ package containing functions dedicated to file handling, including object formating"""
 import re
 
-from .error_handling import *
-from .object_class import AllObject
-from .properties_class import Properties
+from basic_functions.error_handling import *
+from basic_functions.object_class import AllObject
+from basic_functions.properties_class import Properties
 
 #####################################################################################
-from ..declarations.properties_specials import WINDLAYERS, COUNTRIES, CARRIAGES, LIST_OF_STRINGS, GROUP, INDEX, BOUNDARY
+from declarations.properties_specials import WINDLAYERS, COUNTRIES, CARRIAGES, LIST_OF_STRINGS, GROUP, INDEX, BOUNDARY
 
 
 def readPropFromFile(filePointer):
@@ -24,7 +24,8 @@ def readPropFromFile(filePointer):
         nameOnly = re.search(r"^\s*(?P<name>[a-zA-Z0-9_]*)\s*[^;]$", line)
         isWindLayer =re.search(r"^\s*[0-9.]*\s*:\s*[0-9.]*\s*:\s*[0-9.]*\s*;$", line)
         isCountries = re.search(r"^\s*[0-9.]*\s*:\s*[0-9.]*\s*;$", line)
-        isCarriage = re.search(r"^\s*\"LuaScripts\\WorldObjects\\Trains\\\w*.\w*\"\s*;$", line)
+        #isCarriage = re.search(r"^\s*\"LuaScripts\\WorldObjects\\[Tt]rains\\\w*.\w*\"\s*;$", line)
+        isCarriage = re.search(r"^\s*\"LuaScripts\\WorldObjects\\[Tt]rains\\[a-zA-Z0-9_-]*.\w*\"\s*;$", line)
         isBoundary = re.search(r"^\s*[0-9.]*\s*,\s*[0-9.]*\s*;$", line)
 
         if isWindLayer or isCountries or isCarriage or isBoundary:
