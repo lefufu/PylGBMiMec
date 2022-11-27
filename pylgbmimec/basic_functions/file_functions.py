@@ -1,12 +1,12 @@
 """ package containing functions dedicated to file handling, including object formating"""
 import re
 
-from basic_functions.error_handling import *
-from basic_functions.object_class import AllObject
-from basic_functions.properties_class import Properties
+from .error_handling import *
+from .object_class import AllObject
+from .properties_class import Properties
 
 #####################################################################################
-from declarations.properties_specials import WINDLAYERS, COUNTRIES, CARRIAGES, LIST_OF_STRINGS, GROUP, INDEX, BOUNDARY
+from ..declarations.properties_specials import WINDLAYERS, COUNTRIES, CARRIAGES, LIST_OF_STRINGS, GROUP, INDEX, BOUNDARY
 
 
 def readPropFromFile(filePointer):
