@@ -10,6 +10,6 @@ map_size['prokhorovka']={'XMin':0.0, 'ZMin':0.0, 'XMax':166400.0, 'ZMax':166400.
 map_size['rheinland']={'XMin':0.0, 'ZMin':0.0, 'XMax':384000.0, 'ZMax':460800.0}
 map_size['arras']={'XMin':0.0, 'ZMin':0.0, 'XMax':166400.0, 'ZMax':166400.0}
 map_size['normandy-summer']={'XMin':0.0, 'ZMin':0.0, 'XMax':396790.00, 'ZMax':396742.0}
-
+map_size['western_front-spring']={'XMin':0.0, 'ZMin':0.0, 'XMax':166400.0, 'ZMax':166400.0}
 ''' number of lines and row for the x/Z indexing'''
 SPLIT_MAP = 3
