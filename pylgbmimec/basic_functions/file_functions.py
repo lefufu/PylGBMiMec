@@ -1,12 +1,13 @@
 """ package containing functions dedicated to file handling, including object formating"""
 import re
 
-from .error_handling import *
-from .object_class import AllObject
-from .properties_class import Properties
+from basic_functions.error_handling import *
+from basic_functions.object_class import AllObject
+from basic_functions.properties_class import Properties
 
 #####################################################################################
-from ..declarations.properties_specials import WINDLAYERS, COUNTRIES, CARRIAGES, LIST_OF_STRINGS, GROUP, INDEX, BOUNDARY
+from declarations.properties_specials import WINDLAYERS, COUNTRIES, CARRIAGES, LIST_OF_STRINGS, GROUP, INDEX, BOUNDARY
+from declarations.template_declaration import GROUPOFFSET
 
 
 def readPropFromFile(filePointer):
@@ -153,7 +154,8 @@ def readObjectFromFile(filePointer):
         #         objName=test['Name']
         #     else:
         #         objName='None'
-        #     print("new Object : ID= {0}, type = {1}, Name ={2}".format(test['Index'],newObject.type,objName))
+        #     if newObject.type != 'Block' and 'MCU' not in newObject.type  and newObject.type != 'Vehicle':
+        #         print("new Object : ID= {0}, type = {1}, Name ={2}".format(test['Index'], newObject.type, objName))
 
     return newObject
 
@@ -174,6 +176,9 @@ def readGroupFromFile(filePointer, currentlevel:int, mission):
         # read 3 lines name, index, Desc
         for i in range(3):
             propName, prop = readPropFromFile(filePointer)
+            #set offsetfor group Index to avoid overlapping with objects Index
+            if propName == 'Index':
+                prop.Value = GROUPOFFSET+prop.Value
             newGroup.addProp(propName, prop.Value)
         #read and create objects
         endOfGroup = 0

@@ -1,14 +1,16 @@
 import os
 import shutil
 
-from .error_handling import *
-from .mission_class import Mission, strProp, offset
-from .object_class import AllObject
+from basic_functions.error_handling import *
+from basic_functions.find_object import findObject
+from basic_functions.mission_class import Mission, strProp, offset
+from basic_functions.object_class import AllObject
+from declarations.template_declaration import GROUPOFFSET
 
 #header and footer to add in mission file
-from ..declarations.country import CountryName
-from ..declarations.file_extentions import LANG_FILE_EXT
-from ..declarations.properties_specials import NAME, INDEX, DESC, GROUP, COUNTRY
+from pylgbmimec.declarations.country import CountryName
+from pylgbmimec.declarations.properties_specials import NAME, INDEX, DESC, GROUP, COUNTRY, DEFAULTEXTENSION, \
+    LANGAGEEXTENSION, MCUMISSIONBEGIN
 
 HEADER = "# Mission File Version = 1.0;\n"
 FOOTER = "\n# end of file"
@@ -62,15 +64,40 @@ def saveMission(mission:Mission, filename: str = ''):
             criticalError(CAN_NOT_WRITE_FILE.format(filename))
         fileflag = 1
 
+    # create langage file
+    langageFileName = filename.replace('.Mission',DEFAULTEXTENSION)
+    langageFile = open(langageFileName, 'w', encoding='UTF16')
+    if not langageFile:
+        criticalError(CAN_NOT_WRITE_FILE.format(filename))
+
+    for key in mission.LabelsList:
+        line=str(key)+':'+str(mission.LabelsList[key])
+        if '\n' not in line:
+            line = line+'\n'
+        langageFile.write(line)
+    langageFile.close()
+
     # copy langage files
-    for extension in LANG_FILE_EXT:
-        origLangFileName = mission.FileName.replace('.Mission',extension)
-        destLangFileName = filename.replace('.Mission',extension)
-        if os.path.exists(origLangFileName):
-            shutil.copyfile(origLangFileName,destLangFileName)
+    for extension in LANGAGEEXTENSION:
+         origLangFileName = mission.FileName.replace('.Mission',DEFAULTEXTENSION)
+         destLangFileName = filename.replace('.Mission',extension)
+         if os.path.exists(origLangFileName):
+             shutil.copyfile(origLangFileName,destLangFileName)
+
     # process all level 0 objects
-    for obj in sorted(mission.ObjList) :
-        mobjet=mission.ObjList[obj]
+    #rollback negative numbers of Groups
+    fixGroupNegNuber(mission)
+
+    #put mission header at first
+    objIDlist=sorted(mission.ObjList.keys())
+    objIDlist.remove(0)
+    objIDlist.insert(0,0)
+
+
+#    for obj in sorted(mission.ObjList) :
+    for obj in objIDlist:
+        #mobjet=mission.objIDlist
+        mobjet = mission.ObjList[obj]
         if mobjet.Level == 0:
             # process objects
             if mobjet.type != GROUP:
@@ -116,3 +143,10 @@ def copy_other_files(SrcfileName:str, destFileName):
     """ copy all associated language files"""
 
     return
+
+# ---------------------------------------------
+def fixGroupNegNuber(mission:Mission):
+    """ replace negative number of groups by their positive value """
+
+    for groupID in mission.ObjIndex['Group']['00']:
+        mission.ObjList[groupID].PropList['Index'] = -GROUPOFFSET+mission.ObjList[groupID].PropList['Index']

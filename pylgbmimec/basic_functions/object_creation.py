@@ -1,14 +1,14 @@
 #  Contain function do create object
 #  User level :
 
-from .error_handling import *
-from .find_object import findObject, printObjects, findGroupByName
-from .group import addInGroup
-from .mission_class import Mission, Properties
+from basic_functions.error_handling import *
+from basic_functions.find_object import findObject, printObjects, findGroupByName
+from basic_functions.group import addInGroup
+from basic_functions.mission_class import Mission, Properties
 
 
-from .object_class import AllObject
-from ..declarations.properties_specials import INDEX, LINKTRID, MISOBJID
+from basic_functions.object_class import AllObject
+from declarations.properties_specials import INDEX, LINKTRID, MISOBJID, TARGETS
 
 
 # ---------------------------------------------
@@ -31,7 +31,6 @@ def copy_from_mission(destMission:Mission, sourceMission:Mission, groupName=str,
 
     if groupName:
         objlist=findGroupByName(destMission, groupName)
-        print(destMission.ObjList[objlist[0]])
     if len(objlist) > 0:
         groupID = objlist[0]
         level=destMission.ObjList[groupID].Level
@@ -77,8 +76,12 @@ def copy_from_mission(destMission:Mission, sourceMission:Mission, groupName=str,
         if LINKTRID in sourceObj.PropList:
             oldLink=sourceObj.getKv(LINKTRID)
             if oldLink > 0:
-                newlink=sourceObj.getKv(LINKTRID)+offset
-                newObject.setKv(LINKTRID,newlink)
+                # create copy of LINKTRID
+                #newlink=sourceObj.getKv(LINKTRID)+offset
+                newlink=copy_from_mission(destMission, sourceMission, Index=oldLink)
+                newObject.setKv(LINKTRID,newlink[0])
+                (destMission.ObjList[newlink[0]]).setKv(MISOBJID, newindex)
+                (destMission.ObjList[newlink[0]]).PropList[TARGETS]=set()
 
         if MISOBJID in sourceObj.PropList:
             oldLink=sourceObj.getKv(MISOBJID)

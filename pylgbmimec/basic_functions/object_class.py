@@ -1,9 +1,8 @@
-from .properties_class import *
-from .strProp import strProp
-from .warning_handling import warning_msg, DUPLICATE_PROPERTIE, INVALID_PROP_NAME_FOR_GET
-from ..declarations.properties_specials import LINKTRID, COMPLEXTRIGGERCOMMONPROP, OBJECTSCRIPT, TARGETS, OBJECTS, INDEX, \
+from basic_functions.properties_class import *
+from basic_functions.strProp import strProp
+from basic_functions.warning_handling import warning_msg, DUPLICATE_PROPERTIE, INVALID_PROP_NAME_FOR_GET
+from declarations.properties_specials import LINKTRID, COMPLEXTRIGGERCOMMONPROP, OBJECTSCRIPT, TARGETS, OBJECTS, INDEX, \
     NAME, DUPLICATE_CTRIGGER, MULTIPLAYERPLANECONFIG
-
 
 class AllObject:
     """ parent class for all object
@@ -86,9 +85,8 @@ class AllObject:
         """
         if TARGETS not in self.PropList:
             self.PropList[TARGETS]=set()
-        if type(targetList) is list :
+        if type(targetList) is set or type(targetList) is list:
             for i in targetList:
-                #self.PropList["Targets"]=self.PropList["Targets"].union(set(targetList))
                 if i != self.PropList[INDEX]:
                     self.PropList[TARGETS].add(int(i))
         elif type(targetList) is int or type(targetList) is float:
@@ -97,12 +95,12 @@ class AllObject:
             criticalError(INVALID_TARGET_TYPE.format(targetList, self))
 
 # ---------------------------------------------
-    def setTarget(self, targetList):
+    def setTarget(self, targetList:list):
         """ set one ID or a list of ID as targets
         """
         self.PropList[TARGETS]=set()
-        if len(objectList) != 0:
-            self.addTarget(self, targetList)
+        if len(targetList) != 0:
+            self.addTarget(targetList)
 
     # ---------------------------------------------
     def getTarget(self):
@@ -159,14 +157,16 @@ class AllObject:
         newObject.PropList=self.PropList.copy()
         newObject.setKv(INDEX,newIndex)
         oldName=self.getKv(NAME)
-        newName=oldName.replace('\"', '')
-        newObject.setKv(NAME,newName+"_cloned")
+        if oldName is not None:
+            newName=oldName.replace('\"', '')
+            newObject.setKv(NAME,newName+"_cloned")
+        newObject.type = self.type
         return newObject
 
 # ---------------------------------------------
     def cloneWithLinkedEntityProp(self, newIndex:int, mission):
         """clone current object into a new one, and include properties of linekdTR object.
-        Not to be used except for creating temp obejct for find or scan functions"""
+        Not to be used except for creating temp object for find or scan functions"""
         newObject = AllObject()
         newObject.PropList=self.PropList.copy()
         newObject.setKv(INDEX,newIndex)

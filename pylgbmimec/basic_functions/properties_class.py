@@ -1,4 +1,4 @@
-from .error_handling import *
+from basic_functions.error_handling import *
 
 
 class Properties:
@@ -15,10 +15,10 @@ class Properties:
         self.Value = value
 
     # ---------------------------------------------
-    def copy(self) -> object:
+    def copy(self, object) -> object:
         """ copy property into a new one
         """
-        newProp=Properties()
+        newProp=Properties(object)
         if type(self) == int or type(self) == float or type(self) == str:
             newProp=self.Value
         if type(self) == list:
@@ -32,7 +32,10 @@ class Properties:
 # ---------------------------------------------
     def __str__(self):
             typeProp=type(self.Value)
-            if typeProp == float or typeProp == int or typeProp == str:
+            if typeProp == float or typeProp == int :
+                convert2str = "Unitary properties:{0}".format(typeProp)
+                convert2str +="\n  Value:{0}".format(self.Value)
+            elif typeProp == str:
                 convert2str = "Unitary properties:{0}".format(typeProp)
                 convert2str +="\n  Value:{0}".format(self.Value)
             elif typeProp == dict:

@@ -1,18 +1,18 @@
 #  Contain function do modify list of object
 #  User level :
-from .error_handling import *
-from .find_object import findObject
-from .group import findGroup, removeFromGroup
-from .mission_class import Mission, Properties
-from .warning_handling import warning_msg, PROP_TO_MODIFY_NOT_EXISTS, ENTITY_NOT_LINKED, \
+from basic_functions.error_handling import *
+from basic_functions.find_object import findObject
+from basic_functions.group import findGroup, removeFromGroup
+from basic_functions.mission_class import Mission, Properties
+from basic_functions.warning_handling import warning_msg, PROP_TO_MODIFY_NOT_EXISTS, ENTITY_NOT_LINKED, \
     PROP_NOT_EXISTING, PROP_NOT_EXISTING_FOR_MOD
-from ..declarations.envent_definitions import findEvent
-from ..declarations.properties_specials import ONREPORTS, ONEVENTS, LINKTRID, NAME, INDEX, TYPE, CMDID, TARID, \
-    OBJECTSCRIPT, COUNTRIES, COUNTRY, ONREPORT, ONEVENT
-from ..declarations.report_definitions import findReport
+from declarations.envent_definitions import findEvent
+from declarations.properties_specials import ONREPORTS, ONEVENTS, LINKTRID, NAME, INDEX, TYPE, CMDID, TARID, \
+    OBJECTSCRIPT, COUNTRIES, COUNTRY, ONREPORT, ONEVENT, TARGETS, MCUTR, MCUCTRIGGER, SUBTITLEINFO, LCTEXT, OBJECTS
+from declarations.report_definitions import findReport
 
 # ---------------------------------------------
-def modify_kv(mission:Mission, objList:list, **properties):
+def set_kv(mission:Mission, objList, **properties):
     """ modify key Value properties for a list of objects
         :param mission: Mission
            mission containing objects to modify
@@ -23,6 +23,9 @@ def modify_kv(mission:Mission, objList:list, **properties):
     """
     #not really used...
     status=0
+
+    if type(objList) is int:
+        objList = [objList]
 
     for objIndex in objList:
         for key, val in properties.items():
@@ -45,6 +48,9 @@ def modify_kv(mission:Mission, objList:list, **properties):
                         strValue='\"'+strValue+'\"'
                     mission.ObjList[objIndex].PropList[key]=str(strValue)
 
+                if type(mission.ObjList[objIndex].PropList[key]) == set:
+                    mission.ObjList[objIndex].PropList[key]=value
+
             elif LINKTRID in mission.ObjList[objIndex].PropList:
                 #test if prop exists in linked entity
                 linkTRID = mission.ObjList[objIndex].PropList[LINKTRID]
@@ -52,7 +58,7 @@ def modify_kv(mission:Mission, objList:list, **properties):
                 if  linkTRID != 0:
                     # try to update prop in object
                     tempList=[linkTRID]
-                    status=modify_kv(mission,tempList , **tempdict)
+                    status=set_kv(mission, tempList, **tempdict)
             else:
                 # prop not existing for object
                 name=""
@@ -75,12 +81,12 @@ def add_in_targetList(mission:Mission, objList:list, targetList:list):
     #unused
     status=0
 
-    for objID in objList:
-        mission.ObjList[objID].addTarget(targetList)
+    set_as_targetList(mission, objList, targetList, addOption = 1)
+
     return status
 
 # ---------------------------------------------
-def set_as_targetList(mission: Mission, objList: list, targetList: list):
+def set_as_targetList(mission: Mission, objList: list, targetList, addOption=0):
     """ set target(s) to object target  list
     :param mission: Mission
             mission containing objects to modify
@@ -92,9 +98,22 @@ def set_as_targetList(mission: Mission, objList: list, targetList: list):
     # unused
     status = 0
 
-    for objID in objList:
-        mission.ObjList[objID].setTarget(targetList)
+    if type(targetList) is int:
+        targetList = [targetList]
 
+    for objID in objList:
+        if addOption == 0:
+            targetSet = set()
+        else :
+            targetSet = mission.ObjList[objID].PropList[TARGETS].copy()
+        # build the target set
+        for targetID in targetList:
+            # handle objects with LINKTRID => traget should be LINKTRID and not OBJ ID
+            if LINKTRID in mission.ObjList[targetID].PropList and mission.ObjList[objID].type != MCUTR:
+                if mission.ObjList[targetID].PropList[LINKTRID]:
+                    targetID = mission.ObjList[targetID].PropList[LINKTRID]
+            targetSet.add(int(targetID))
+        mission.ObjList[objID].PropList[TARGETS] = targetSet
     return status
 
 
@@ -111,13 +130,13 @@ def add_in_objectList(mission: Mission, objList: list, targetList: list):
     # unused
     status = 0
 
-    for objID in objList:
-        mission.ObjList[objID].addObject(targetList)
+    set_as_objectList(mission, objList, targetList, addOption = 1)
+
     return status
 
 
 # ---------------------------------------------
-def set_as_objectList(mission: Mission, objList: list, targetList: list):
+def set_as_objectList(mission: Mission, objToModifyList: list, objectsList: list, addOption=0):
     """ set target(s) to object object list
     :param mission: Mission
             mission containing objects to modify
@@ -129,8 +148,23 @@ def set_as_objectList(mission: Mission, objList: list, targetList: list):
     # unused
     status = 0
 
-    for objID in objList:
-        mission.ObjList[objID].SetObject(targetList)
+    if type(objectsList) is int:
+        objectsList = [objectsList]
+
+    for objID in objToModifyList:
+        if addOption == 0:
+            objectSet = set()
+        else :
+            objectSet = mission.ObjList[objID].PropList[OBJECTS].copy()
+        # build the target set
+        for objectID in objectsList:
+            # handle objects with LINKTRID => traget should be LINKTRID and not OBJ ID
+            if LINKTRID in mission.ObjList[objectID].PropList and mission.ObjList[objID].type != MCUTR:
+                if mission.ObjList[objectID].PropList[LINKTRID]:
+                    objectID = mission.ObjList[objectID].PropList[LINKTRID]
+            objectSet.add(int(objectID))
+
+        mission.ObjList[objID].PropList[OBJECTS] = objectSet
 
     return status
 # ---------------------------------------------
@@ -187,7 +221,7 @@ def set_OnReports(mission: Mission, objList: list, reportName:str, commandID:lis
     add_OnReports(mission, objList, reportName, commandID, targetID, reset=1)
 
 # ---------------------------------------------
-def add_OnEvents(mission: Mission, objList: list, eventName:str, targetID: list, reset=0):
+def add_OnEvents(mission: Mission, objList: list, eventName:str, targetIDList: list, reset=0):
     """ add targetList objects for event reportNumber of objects objList
     :param mission: Mission
             mission containing objects to modify
@@ -204,21 +238,34 @@ def add_OnEvents(mission: Mission, objList: list, eventName:str, targetID: list,
 """
     for obj in objList:
         #Find MCU_TR_Entity associated to object
-        if 'LinkTrId' in mission.ObjList[obj].PropList:
-            linkTrId=mission.ObjList[obj].PropList[LINKTRID]
+        if 'LinkTrId' in mission.ObjList[obj].PropList or mission.ObjList[obj].type == MCUCTRIGGER :
+            if mission.ObjList[obj].type == MCUCTRIGGER:
+                linkTrId = obj
+            else:
+                linkTrId=mission.ObjList[obj].PropList[LINKTRID]
+
             if linkTrId == 0:
                 warning_msg(ENTITY_NOT_LINKED.format(obj,'add_OnEvents'))
             else:
+                newEventlist=list()
                 if reset == 1 or ONEVENTS not in mission.ObjList[linkTrId].PropList:
                     # reset or create OnReports list
                     mission.ObjList[linkTrId].PropList[ONEVENTS]=list()
-                #create a new propertie and add it to the 'OnReports' list
-                prop = Properties('')
-                prop.Value = dict()
-                prop.Value[TYPE] = findEvent(mission.ObjList[obj].type, eventName)
-                prop.Value[TARID] = targetID[0]
-                prop.Value['LIST_NAME;'] = ONEVENT
-                mission.ObjList[linkTrId].PropList[ONEVENTS].append(prop)
+                newEventlist = newEventlist + mission.ObjList[linkTrId].PropList[ONEVENTS]
+                #loop on target objects
+                for targetID in targetIDList:
+                    #create a new propertie and add it to the 'OnReports' list
+                    prop = Properties('')
+                    prop.Value = dict()
+                    prop.Value[TYPE] = findEvent(mission.ObjList[obj].type, eventName)
+                    #replace targetId by its linkID if existing, otherwise use taret ID
+                    if LINKTRID in mission.ObjList[targetID].PropList:
+                        if mission.ObjList[targetID].PropList[LINKTRID]:
+                            targetID = mission.ObjList[targetID].PropList[LINKTRID]
+                    prop.Value[TARID] = targetID
+                    prop.Value['LIST_NAME;'] = ONEVENT
+                    newEventlist.append(prop)
+                mission.ObjList[linkTrId].PropList[ONEVENTS]=newEventlist
         else:
             warning_msg(ENTITY_NOT_LINKED.format(obj, 'add_OnEvents'))
 
@@ -296,7 +343,7 @@ def set_ObjScriptList(mission: Mission, objList: list, ObjScriptList:list=None, 
     add_ObjScriptList(mission, objList, ObjScriptList, Countries, reset = 1)
 
 #---------------------------------------------
-#TODO : delete object
+# delete object
 def deleteObject(mission:Mission, objList:list):
     """ delete a list of object in the mission
         :param mission: Mission
@@ -331,6 +378,9 @@ def deleteObject(mission:Mission, objList:list):
                  objectList.discard(linkTrID)
                  mission.ObjList[objID2].setTarget(objectList)
 
+        # remove object in mission LabelsList
+        mission.removeObjectFromLabelsList(objID)
+
         # remove object in objIndex
         mission.removeObjectFromIndex(objID)
 
@@ -341,4 +391,55 @@ def deleteObject(mission:Mission, objList:list):
         # remove object in mission ObjList
         mission.removeObjectFromList(objID)
 
+
+
     return
+
+# ---------------------------------------------
+def get_kv(mission:Mission, objID:int, KVname:str):
+    """ modify key Value properties for a list of objects
+        :param mission: Mission
+           mission containing objects to modify
+        :param objID: int
+            object ID in which value associated to key is to be read
+        :param properties : KVname
+            name of the Key
+    """
+    #not really used...
+    status=0
+
+    if type(objID) is list:
+        objID=objID[0]
+
+    return mission.ObjList[objID].PropList[KVname]
+
+
+#---------------------------------------------
+def set_subtitleValues(mission:Mission, objList:list, **properties):
+    """ modify subtitles properties of a list of subtitles
+        :param mission: Mission
+           mission containing objects to modify
+        :param objList: list
+            list of subtitles ID to modify
+        :param properties : dict
+            list of key / value to modify
+    """
+    for subTitleID in objList:
+        newDict = dict()
+        for key, val in properties.items():
+            if key != 'Text':
+                if key in mission.ObjList[subTitleID].PropList[SUBTITLEINFO].keys():
+                    #mission.ObjList[subTitleID].PropList[SUBTITLEINFO][key] = val
+                    newDict[key]=val
+                else:
+                    warning_msg(PROP_NOT_EXISTING_FOR_MOD.format(key, subTitleID))
+            else:
+                # overwrite entry of text for the subtitle by  adding a new one
+                #find if subtitle is in
+                lastlabelNo = max(mission.LabelsList.keys())
+                lastlabelNoComment = lastlabelNo + 1
+                mission.LabelsList[lastlabelNoComment] = val
+                #mission.ObjList[subTitleID].PropList[SUBTITLEINFO][LCTEXT] = lastlabelNoComment
+                newDict[LCTEXT] = lastlabelNoComment
+
+        mission.ObjList[subTitleID].PropList[SUBTITLEINFO]=newDict

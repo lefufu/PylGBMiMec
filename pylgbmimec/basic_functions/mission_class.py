@@ -1,8 +1,10 @@
 #from typing import List, Any
-from .file_functions import getBegining, readGroupFromFile, readObjectFromFile
-from .object_class import *
-from ..declarations.map_size import *
-from ..declarations.properties_specials import GUIMAP, OPTIONS, GROUP, XPOS, ZPOS
+
+from pylgbmimec.basic_functions.file_functions import getBegining, readGroupFromFile, readObjectFromFile, readLine
+from pylgbmimec.basic_functions.object_class import *
+from pylgbmimec.declarations.map_size import *
+from pylgbmimec.declarations.properties_specials import GUIMAP, OPTIONS, GROUP, XPOS, ZPOS, LCNAME, LCDESC
+
 
 class Mission:
     """Mission Class, contain an array of AllObject objects
@@ -13,6 +15,9 @@ class Mission:
     ObjIndex : dictionnary of dictionnary
     Index of object by type and area to speedup searching. Map is splitted into 16 zone
     eg : ObjIndex['Plane']['03'] = list of all plane object Index defined in 1st row fourth column of map
+
+    LabelList[] : Key, value
+    dict of labels from .eng file
 
     MaxIndex : int
     maximum Index of all objects
@@ -46,6 +51,7 @@ class Mission:
         """
         self.ObjList = dict()
         self.ObjIndex = dict()
+        self.LabelsList = dict()
         self.MaxIndex: int = 0
         self.Xmin: float = 0.0
         self.Xmax: float = 0.0
@@ -73,7 +79,9 @@ class Mission:
 
             # Add object to object list
             objIndex = Object.getKv(INDEX)
+
             self.ObjList[objIndex] = Object
+            #self.ObjList[objIndex+self.MaxIndex] = Object
 
             if level != 0:
                 Object.Level=level
@@ -142,9 +150,41 @@ class Mission:
             :param objID: int
                 object ID to remove
         """
-        print(self.ObjList[objID])
+        #print(self.ObjList[objID])
         self.ObjList.pop(objID)
         return
+
+    # ---------------------------------------------
+    def removeObjectFromLabelsList(self, objID:int):
+        """remove an object from the labels/comment list of the mission
+            :param typeObj: str
+                type of object
+            :param objID: int
+                object ID to remove
+        """
+        #print(self.ObjList[objID])
+        if objID in self.ObjList:
+            LCName = self.ObjList[objID].getKv(LCNAME)
+            if LCName in self.LabelsList:
+                self.LabelsList.pop(LCName)
+
+            LCdesc = self.ObjList[objID].getKv(LCDESC)
+            if LCName in self.LabelsList:
+                self.LabelsList.pop(LCdesc)
+
+        return
+    # ---------------------------------------------
+    # def removeObjectFromList(self, objlist:list):
+    #     """remove an object from the index list of the mission
+    #         :param typeObj: str
+    #             type of object
+    #         :param objID: int
+    #             object ID to remove
+    #     """
+    #     #print(self.ObjList[objID])
+    #     for objID in objlist:
+    #         self.ObjList.pop(objID)
+    #     return
     # ---------------------------------------------
     def setWindLayer(self, new_wind_layer_dictionary: dict):
         for i, altitude in enumerate([0, 500, 1000, 2000, 5000]):
@@ -155,8 +195,9 @@ class Mission:
         return
 #---------------------------------------------
 def readMissionFromFile(mission:Mission, fileName: str) -> object:
-        """ Read mission from IL2 GB .mission file"""
-        filePointer=open(fileName)
+        """ Read mission and labels from IL2 GB .mission file"""
+        #read .mission file
+        filePointer=open(fileName, encoding='UTF8')
         if not filePointer:
             criticalError(CAN_NOT_OPEN_FILE.format(fileName))
         mission.FileName=fileName
@@ -185,11 +226,80 @@ def readMissionFromFile(mission:Mission, fileName: str) -> object:
 
         filePointer.close()
 
+        #read lable (.eng) file
+        #Open file
+        if '.mission' in fileName:
+            labelFileName = fileName.replace(".mission", ".eng")
+        if '.Mission' in fileName:
+            labelFileName = fileName.replace(".Mission", ".eng")
+        filePointer = open(labelFileName,encoding='utf16')
+
+        if not filePointer:
+            criticalError(CAN_NOT_OPEN_FILE.format(fileName))
+
+        for line in filePointer:
+            keyValue=line.split(':')
+            key = int(keyValue[0])
+            mission.LabelsList[key] = keyValue[1]
+
+        filePointer.close()
+
+
+#---------------------------------------------
+def readTemplateFromFile(mission:Mission, fileName: str) -> object:
+        """ Read mission from IL2 GB .mission file"""
+        filePointer=open(fileName)
+        if not filePointer:
+            criticalError(CAN_NOT_OPEN_FILE.format(fileName))
+        mission.FileName=fileName
+        #get first object type
+        last_pos = filePointer.tell()
+        objectType = getBegining(filePointer)
+        filePointer.seek(last_pos)
+
+        #must start by "Options"
+        #if objectType == OPTIONS:
+        #    criticalError(TEMPLATE_FILE_WITH_OPTION)
+        #else:
+            #read all objects
+        endOfFile=0
+        while not endOfFile:
+            last_pos = filePointer.tell()
+            objectType = getBegining(filePointer)
+            filePointer.seek(last_pos)
+            if objectType == GROUP:
+                #readGroupFromFile(filePointer, 0, mission)
+                print("skip")
+            elif objectType !='' :
+                newObject=readObjectFromFile(filePointer)
+                if objectType != OPTIONS:
+                    mission.addObject(newObject)
+            else:
+               endOfFile=1
+
+        filePointer.close()
+
+
 #---------------------------------------------
 def findGrid(mission:Mission, object:AllObject):
     """ find Grid sector of an object (not linked to map numpad """
     XCoord = object.getKv(XPOS)
     ZCoord = object.getKv(ZPOS)
+    Xgrid = int(XCoord / ((mission.Xmax - mission.Xmin) / mission.splitNB))
+    Zgrid = int(ZCoord / ((mission.Zmax - mission.Zmin) / mission.splitNB))
+    # fix for object placed outside the map
+    if Xgrid < 0: Xgrid=0
+    if Xgrid > (SPLIT_MAP-1) : Xgrid = SPLIT_MAP-1
+    if Zgrid < 0: Zgrid=0
+    if Zgrid > (SPLIT_MAP-1) : Zgrid = SPLIT_MAP-1
+    grid = str(Xgrid) + str(Zgrid)
+    return grid
+
+#---------------------------------------------
+def findGridOfPos(mission:Mission, XPos, ZPos):
+    """ find Grid sector of an object (not linked to map numpad """
+    XCoord = XPos
+    ZCoord = ZPos
     Xgrid = int(XCoord / ((mission.Xmax - mission.Xmin) / mission.splitNB))
     Zgrid = int(ZCoord / ((mission.Zmax - mission.Zmin) / mission.splitNB))
     # fix for object placed outside the map
@@ -210,34 +320,48 @@ def rangeGrid(mission, XRange=None, ZRange=None):
 
     gridRetained=list()
 
-    if XRange and type(XRange) is range :
-        xmin = mission.Xmax
-        xmax = mission.Xmin
-        for i in XRange:
-            if i < xmin:
-                xmin = i
-            if i > xmax:
-                xmax = i
-        i+=1
-        if i > xmax:
-             xmax = i
+    #was bugged and not efficent
+    # if XRange and type(XRange) is range :
+    #     xmin = mission.Xmax
+    #     xmax = mission.Xmin
+    #     for i in XRange:
+    #         if i < xmin:
+    #             xmin = i
+    #         if i > xmax:
+    #             xmax = i
+    #     i+=1
+    #     if i > xmax:
+    #          xmax = i
+    #
+    # if ZRange and type(ZRange) is range :
+    #     zmin = mission.Zmax
+    #     zmax = mission.Zmin
+    #     for i in ZRange:
+    #         if i < zmin:
+    #             zmin = i
+    #         if i > zmax:
+    #             zmax = i
+    #     i+=1
+    #     if i > zmax:
+    #          zmax = i
+    #
+    # xgridMin = int(xmin / ((mission.Xmax - mission.Xmin) / mission.splitNB))
+    # xgridMax = int(xmax / ((mission.Xmax - mission.Xmin) / mission.splitNB))
+    # zgridMin = int(zmin / ((mission.Zmax - mission.Zmin) / mission.splitNB))
+    # zgridMax = int(zmax / ((mission.Zmax - mission.Zmin) / mission.splitNB))
 
-    if ZRange and type(ZRange) is range :
-        zmin = mission.Zmax
-        zmax = mission.Zmin
-        for i in ZRange:
-            if i < zmin:
-                zmin = i
-            if i > zmax:
-                zmax = i
-        i+=1
-        if i > zmax:
-             zmax = i
+    xmin = min(XRange)
+    xmax = max(XRange)
+    zmin = min(ZRange)
+    zmax = max(ZRange)
 
-    xgridMin = int(xmin / ((mission.Xmax - mission.Xmin) / mission.splitNB))
-    xgridMax = int(xmax / ((mission.Xmax - mission.Xmin) / mission.splitNB))
-    zgridMin = int(zmin / ((mission.Zmax - mission.Zmin) / mission.splitNB))
-    zgridMax = int(zmax / ((mission.Zmax - mission.Zmin) / mission.splitNB))
+    gridMin = findGridOfPos(mission, xmin, zmin)
+    gridMax = findGridOfPos(mission, xmax, zmax)
+    xgridMin=int(gridMin[0])
+    xgridMax=int(gridMax[0])
+    zgridMin=int(gridMin[1])
+    zgridMax=int(gridMax[1])
+
 
     for gridX in range(xgridMin, xgridMax+1):
         for gridZ in range(zgridMin, zgridMax+1):

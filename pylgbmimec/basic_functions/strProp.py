@@ -1,5 +1,5 @@
 #####################################################################################
-from ..declarations.properties_specials import LIST_OF_STRINGS, OBJECTSCRIPT, LISTNAME, COUNTRY, MULTIPLAYERPLANECONFIG
+from declarations.properties_specials import LIST_OF_STRINGS, OBJECTSCRIPT, LISTNAME, COUNTRY, MULTIPLAYERPLANECONFIG
 
 
 def strProp(propertieName: str, propValue: object) -> str:
@@ -10,7 +10,7 @@ def strProp(propertieName: str, propValue: object) -> str:
     if typeProp == float or typeProp == int:
         convert2str += " = {0};".format(propValue)
     if typeProp == str:
-        convert2str += " = {0};".format(propValue)
+        convert2str += " = {0};".format(propValue.replace('\x01',''))
     # ARRAYS
     if typeProp == set:
         tempStr = str(propValue)

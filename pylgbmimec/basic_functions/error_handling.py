@@ -17,6 +17,8 @@ DOUBLE_RANGE_FILTER = "Error : FromPoint can not be used in findObjectInRange fu
 CAN_NOT_MODIFY_INDEX = "Error : Can not modify Index for object {0}"
 REPORT_NOT_DEFINED_FOR_TYPE = "Error : Report not defined for type {0}"
 EVENT_NOT_DEFINED_FOR_TYPE = "Error : Event not defined for type {0}"
+TEMPLATE_FILE_WITH_OPTION = "Error : Template file started with \"Options\" object"
+INVALID_INPUT_NUMER = "Error : script must be called with \"input file mission name\" and \"ouput file mission name\" (including \") as parameter\neg: PWCGCoopConvertor \"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Multiplayer\\cooperative\\test campaign.Mission\" \"D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Multiplayer\\cooperative\\converted.Mission\""
 
 """ handle error """
 def criticalError(message):

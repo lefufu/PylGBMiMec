@@ -3,13 +3,12 @@
 
 import math
 import re
-from logging import warning
-from .mission_class import Mission, INVALID_TYPE_FOR_RANGE, criticalError, BAD_FILTER_RANGE, rangeGrid, \
+from basic_functions.mission_class import Mission, INVALID_TYPE_FOR_RANGE, criticalError, BAD_FILTER_RANGE, rangeGrid, \
     DOUBLE_RANGE_FILTER
-from .warning_handling import PROP_NOT_EXISTING, ONLY_FIRST_OBJECT_USED, warning_msg, EMPTY_CENTER, \
+from basic_functions.warning_handling import PROP_NOT_EXISTING, ONLY_FIRST_OBJECT_USED, warning_msg, EMPTY_CENTER, \
     TYPE_NOT_SUPPORTED_FOR_REQUEST
 
-from ..declarations.properties_specials import XPOS, ZPOS, TYPE, GROUP, INDEX, NAME, OBJECTSCRIPT, OBJECTS, \
+from declarations.properties_specials import XPOS, ZPOS, TYPE, GROUP, INDEX, NAME, OBJECTSCRIPT, OBJECTS, \
     EXCEPTION_FOR_FILTER, LINKTRID, TARGETS
 
 
@@ -52,8 +51,8 @@ def findObject(mission:Mission, **parameters ):
         gridList = rangeGrid(mission, XRange=parameters[XPOS], ZRange=parameters[ZPOS])
 
     if 'FromPoint' in parameters:
-        xRange=range(parameters['FromPoint'][0]-parameters['FromPoint'][2], parameters['FromPoint'][0]+parameters['FromPoint'][2])
-        ZRange = range(parameters['FromPoint'][1]-parameters['FromPoint'][2], parameters['FromPoint'][1]+parameters['FromPoint'][2])
+        xRange=range(parameters['FromPoint'][0]-int(parameters['FromPoint'][2]/2), parameters['FromPoint'][0]+int(parameters['FromPoint'][2]/2))
+        ZRange = range(parameters['FromPoint'][1]-int(parameters['FromPoint'][2]/2), parameters['FromPoint'][1]+int(parameters['FromPoint'][2]/2))
         gridList = rangeGrid(mission, XRange=xRange, ZRange=ZRange)
 
     #initiate list of object, either by type or Group
@@ -70,7 +69,6 @@ def findObject(mission:Mission, **parameters ):
                 for tempgrid in mission.ObjIndex[typeObj]:
                     if tempgrid != 'nb':
                         gridList.append(tempgrid)
-
             for tmpGrid in gridList:
                 if tmpGrid in mission.ObjIndex[typeObj]:
                     for index in mission.ObjIndex[typeObj][tmpGrid]:
@@ -101,6 +99,10 @@ def findObject(mission:Mission, **parameters ):
 
     listOfObject = filterListOfObject(mission, listOfObject, dictOfFilter)
 
+    # add  the object if not in list
+    if 'Index' in parameters:
+        listOfObject.append(parameters['Index'])
+
     return listOfObject
 # ---------------------------------------------
 def findObjectInRange(mission:Mission, centerObj:list, Range:int, **parameters):
@@ -127,22 +129,27 @@ def findObjectInRange(mission:Mission, centerObj:list, Range:int, **parameters):
             list of object ID that fullfill criterions
      """
     filteredList = list()
+
     if 'FromPoint' in parameters:
         criticalError(DOUBLE_RANGE_FILTER)
     else:
-        if len(centerObj) == 0:
-            warning_msg(EMPTY_CENTER)
-        elif len(centerObj) > 1:
+        #if len(centerObj) == 0:
+        #    warning_msg(EMPTY_CENTER)
+        #elif len(centerObj) > 1:
+        if type(centerObj) == list:
             warning_msg(ONLY_FIRST_OBJECT_USED.format(centerObj))
+            center = centerObj[0]
         else:
+            center = centerObj
         #create FromPoint parameter
-            fromPointlist=list()
-            fromPointlist.append(int(mission.ObjList[centerObj[0]].PropList[XPOS]))
-            fromPointlist.append(int(mission.ObjList[centerObj[0]].PropList[ZPOS]))
-            fromPointlist.append(Range)
-            parameters['FromPoint']=fromPointlist
-            filteredList = findObject(mission, **parameters)
+        fromPointlist=list()
+        fromPointlist.append(int(mission.ObjList[center].PropList[XPOS]))
+        fromPointlist.append(int(mission.ObjList[center].PropList[ZPOS]))
+        fromPointlist.append(Range)
+        parameters['FromPoint']=fromPointlist
+        filteredList = findObject(mission, **parameters)
     return filteredList
+
 # ---------------------------------------------
 def filterListOfObject(mission:Mission, objIndexList:list, dictOfFilter:dict ):
     """find objects of a mission by using and key = value parameters"""
@@ -221,7 +228,9 @@ def getIndexInGroup(mission, groupName):
     objectInGroup = list()
     for obj in mission.ObjIndex[GROUP]['00']:
         if mission.ObjList[obj].type == GROUP :
-            if re.search(groupName, mission.ObjList[obj].PropList[NAME].replace("\"","")):
+            #if re.search(groupName, mission.ObjList[obj].PropList[NAME].replace("\"","")):
+            tempoName = "\"" +mission.ObjList[obj].PropList[NAME].replace("\"","") + "\""
+            if re.search(groupName, tempoName) :
                 for index in mission.ObjList[obj].PropList[OBJECTS]:
                     if mission.ObjList[index].type == GROUP:
                         subGroupName=mission.ObjList[index].PropList[NAME].replace("\"","")
