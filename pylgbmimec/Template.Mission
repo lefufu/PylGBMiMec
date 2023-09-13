@@ -1,0 +1,836 @@
+# Mission File Version = 1.0;
+
+Options
+{
+  LCName = 0;
+  LCDesc = 1;
+  LCAuthor = 2;
+  PlayerConfig = "";
+  MultiplayerPlaneConfig = "LuaScripts\WorldObjects\Planes\a20b.txt";
+  MultiplayerPlaneConfig = "LuaScripts\WorldObjects\Planes\aircodh4.txt";
+  MultiplayerPlaneConfig = "LuaScripts\WorldObjects\Planes\i16t24.txt";
+  MultiplayerPlaneConfig = "LuaScripts\WorldObjects\Planes\lagg3s29.txt";
+  MultiplayerPlaneConfig = "LuaScripts\WorldObjects\Planes\nieuport11.txt";
+  MultiplayerPlaneConfig = "LuaScripts\WorldObjects\Planes\p51b5.txt";
+  MultiplayerPlaneConfig = "LuaScripts\WorldObjects\Planes\p51d15.txt";
+  MultiplayerPlaneConfig = "LuaScripts\WorldObjects\Planes\spad13.txt";
+  MultiplayerPlaneConfig = "LuaScripts\WorldObjects\Planes\yak1s127.txt";
+  Time = 12:30:0;
+  Date = 19.11.1942;
+  HMap = "graphics\landscape\height.hini";
+  Textures = "graphics\landscape\textures.tini";
+  Forests = "graphics\landscape\trees\woods.wds";
+  Layers = "";
+  GuiMap = "lapino-winter";
+  SeasonPrefix = "wi";
+  MissionType = 1;
+  AqmId = 0;
+  CloudLevel = 500;
+  CloudHeight = 500;
+  PrecLevel = 0;
+  PrecType = 0;
+  CloudConfig = "winter\00_clear_00\sky.ini";
+  SeaState = 0;
+  Turbulence = 0;
+  TempPressLevel = 0;
+  Temperature = -15;
+  Pressure = 760;
+  Haze = 0;
+  LayerFog = 0;
+  WindLayers
+  {
+    0 :     0 :     0;
+    500 :     0 :     0;
+    1000 :     0 :     0;
+    2000 :     0 :     0;
+    5000 :     0 :     0;
+  }
+  Countries
+  {
+    0 : 0;
+    101 : 1;
+    102 : 1;
+    103 : 1;
+    201 : 2;
+    202 : 2;
+    203 : 2;
+    301 : 3;
+    302 : 3;
+    303 : 3;
+    304 : 3;
+    305 : 3;
+    401 : 4;
+    402 : 4;
+  }
+}
+
+MCU_TR_Subtitle
+{
+  Index = 2;
+  Name = "MIMEC Translator Subtitle";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 3624.558;
+  YPos = 19.085;
+  ZPos = 1094.429;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  SubtitleInfo
+  {
+    Duration = 1;
+    FontSize = 20;
+    HAlign = 1;
+    VAlign = 2;
+    RColor = 255;
+    GColor = 255;
+    BColor = 255;
+    LCText = 3;
+  }
+  
+  Coalitions = [0, 1, 2, 3, 4];
+}
+
+
+
+MCU_Activate
+{
+  Index = 3;
+  Name = "MIMEC Trigger Activate";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 2596.210;
+  YPos = 17.979;
+  ZPos = 1057.702;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+}
+
+
+
+MCU_Deactivate
+{
+  Index = 4;
+  Name = "MIMEC Trigger Deactivate";
+  Desc = "";
+  Targets = [];
+  Objects = [2];
+  XPos = 1604.590;
+  YPos = 17.848;
+  ZPos = 1039.339;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+}
+
+
+
+MCU_Delete
+{
+  Index = 5;
+  Name = "MIMEC Trigger Delete";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 594.606;
+  YPos = 17.775;
+  ZPos = 1020.975;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+}
+
+
+
+MCU_TR_ComplexTrigger
+{
+  Index = 6;
+  Name = "MIMEC Translator Complex Trigge";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 3503.032;
+  YPos = 75.343;
+  ZPos = 3638.279;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 0;
+  Enabled = 0;
+  Cylinder = 1;
+  Radius = 1000;
+  DamageThreshold = 1;
+  DamageReport = 50;
+  CheckVehicles = 0;
+  CheckPlanes = 1;
+  EventsFilterSpawned = 0;
+  EventsFilterEnteredSimple = 1;
+  EventsFilterEnteredAlive = 0;
+  EventsFilterLeftSimple = 0;
+  EventsFilterLeftAlive = 0;
+  EventsFilterFinishedSimple = 0;
+  EventsFilterFinishedAlive = 0;
+  EventsFilterStationaryAndAlive = 0;
+  EventsFilterFinishedStationaryAndAlive = 0;
+  EventsFilterTookOff = 0;
+  EventsFilterDamaged = 0;
+  EventsFilterCriticallyDamaged = 0;
+  EventsFilterRepaired = 0;
+  EventsFilterKilled = 0;
+  EventsFilterDropedBombs = 0;
+  EventsFilterFiredFlare = 0;
+  EventsFilterFiredRockets = 0;
+  EventsFilterDroppedCargoContainers = 0;
+  EventsFilterDeliveredCargo = 0;
+  EventsFilterParatrooperJumped = 0;
+  EventsFilterParatrooperLandedAlive = 0;
+  Country = 201;
+  ObjectScript = "luascripts\worldobjects\planes\a20b.txt";
+  OnEvents
+  {
+    OnEvent
+    {
+      Type = 58;
+      TarId = 2;
+    }
+    OnEvent
+    {
+      Type = 58;
+      TarId = 4;
+    }
+  }
+}
+
+
+
+MCU_CMD_Behaviour
+{
+  Index = 7;
+  Name = "MIMEC command Behaviour";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 2452.824;
+  YPos = 34.261;
+  ZPos = 3711.194;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Filter = 0;
+  Vulnerable = 1;
+  Engageable = 1;
+  LimitAmmo = 1;
+  RepairFriendlies = 0;
+  RehealFriendlies = 1;
+  RearmFriendlies = 0;
+  RefuelFriendlies = 0;
+  AILevel = 2;
+  Country = 0;
+  FloatParam = 0;
+}
+
+
+
+Airfield
+{
+  Name = "MIMEC Airfield";
+  Index = 8;
+  LinkTrId = 9;
+  XPos = 1500.614;
+  YPos = 23.527;
+  ZPos = 3745.100;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\airfields\fakefield.mgm";
+  Script = "LuaScripts\WorldObjects\Airfields\fakefield.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+  Callsign = 0;
+  Callnum = 0;
+  Planes
+  {
+    Plane
+    {
+      SetIndex = 0;
+      Number = 10;
+      AILevel = 2;
+      StartInAir = 2;
+      Engageable = 1;
+      Vulnerable = 1;
+      LimitAmmo = 1;
+      AIRTBDecision = 1;
+      Renewable = 1;
+      PayloadId = 0;
+      WMMask = 1;
+      Fuel = 1;
+      RouteTime = 0;
+      RenewTime = 1800;
+      Altitude = 500;
+      Spotter = -1;
+      Model = "graphics\planes\a20b\a20b.mgm";
+      Script = "LuaScripts\WorldObjects\Planes\a20b.txt";
+      Name = "template";
+      Skin = "";
+      AvMods = "";
+      AvSkins = "";
+      AvPayloads = "";
+      Callsign = 0;
+      Callnum = 0;
+      TCode = "012";
+      TCodeColors = "000";
+    }
+  }
+  ReturnPlanes = 0;
+  Hydrodrome = 0;
+  RepairFriendlies = 0;
+  RehealFriendlies = 0;
+  RearmFriendlies = 0;
+  RefuelFriendlies = 0;
+  RepairTime = 0;
+  RehealTime = 0;
+  RearmTime = 0;
+  RefuelTime = 0;
+  MaintenanceRadius = 1000;
+}
+
+
+
+MCU_TR_Entity
+{
+  Index = 9;
+  Name = "Airfield entity";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 1500.614;
+  YPos = 23.727;
+  ZPos = 3745.100;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  MisObjID = 8;
+  OnEvents
+  {
+    OnEvent
+    {
+      Type = 20;
+      TarId = 2;
+    }
+  }
+}
+
+
+
+MCU_Counter
+{
+  Index = 11;
+  Name = "MIMEC Counter";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 560.046;
+  YPos = 105.702;
+  ZPos = 3734.731;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Counter = 1;
+  Dropcount = 0;
+}
+
+
+
+MCU_Timer
+{
+  Index = 12;
+  Name = "MIMEC Timer";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 3562.981;
+  YPos = 120.531;
+  ZPos = 5832.856;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Time = 0;
+  Random = 100;
+}
+
+
+
+MCU_Icon
+{
+  Index = 13;
+  Targets = [];
+  Objects = [];
+  XPos = 2594.565;
+  YPos = 49.910;
+  ZPos = 5765.598;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  LCName = 4;
+  LCDesc = 5;
+  IconId = 905;
+  RColor = 255;
+  GColor = 255;
+  BColor = 255;
+  LineType = 0;
+  Coalitions = [1, 2, 3, 4, 0];
+}
+
+
+
+MCU_Icon
+{
+  Index = 14;
+  Targets = [];
+  Objects = [];
+  XPos = 1391.462;
+  YPos = 19.360;
+  ZPos = 5765.598;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  LCName = 6;
+  LCDesc = 7;
+  IconId = 901;
+  RColor = 255;
+  GColor = 255;
+  BColor = 255;
+  LineType = 0;
+  Coalitions = [1, 2, 3, 4, 0];
+}
+
+
+
+Airfield
+{
+  Name = "MIMEC Menu Airfield";
+  Index = 15;
+  LinkTrId = 16;
+  XPos = 541.459;
+  YPos = 17.781;
+  ZPos = 5783.374;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Model = "graphics\airfields\fakefield.mgm";
+  Script = "LuaScripts\WorldObjects\Airfields\fakefield.txt";
+  Country = 0;
+  Desc = "";
+  Durability = 25000;
+  DamageReport = 50;
+  DamageThreshold = 1;
+  DeleteAfterDeath = 1;
+  Callsign = 0;
+  Callnum = 0;
+  Planes
+  {
+    Plane
+    {
+      SetIndex = 0;
+      Number = 1;
+      AILevel = 2;
+      StartInAir = 2;
+      Engageable = 1;
+      Vulnerable = 1;
+      LimitAmmo = 1;
+      AIRTBDecision = 1;
+      Renewable = 1;
+      PayloadId = 22;
+      WMMask = 1;
+      Fuel = 0;
+      RouteTime = 0;
+      RenewTime = 1800;
+      Altitude = 500;
+      Spotter = -1;
+      Model = "graphics\planes\i16t24\i16t24.mgm";
+      Script = "LuaScripts\WorldObjects\Planes\i16t24.txt";
+      Name = "ensure no one is still playing before spawning";
+      Skin = "";
+      AvMods = "";
+      AvSkins = "";
+      AvPayloads = "";
+      Callsign = 0;
+      Callnum = 0;
+      TCode = "%20%20%20%20";
+      TCodeColors = "0000";
+    }
+    Plane
+    {
+      SetIndex = 0;
+      Number = 1;
+      AILevel = 2;
+      StartInAir = 2;
+      Engageable = 1;
+      Vulnerable = 1;
+      LimitAmmo = 1;
+      AIRTBDecision = 1;
+      Renewable = 1;
+      PayloadId = 49;
+      WMMask = 1;
+      Fuel = 0;
+      RouteTime = 0;
+      RenewTime = 1800;
+      Altitude = 500;
+      Spotter = -1;
+      Model = "graphics\planes\lagg3s29\lagg3s29.mgm";
+      Script = "LuaScripts\WorldObjects\Planes\lagg3s29.txt";
+      Name = "ensure no one is still playing before spawning";
+      Skin = "";
+      AvMods = "";
+      AvSkins = "";
+      AvPayloads = "";
+      Callsign = 0;
+      Callnum = 0;
+      TCode = "%20%20";
+      TCodeColors = "00";
+    }
+    Plane
+    {
+      SetIndex = 0;
+      Number = 1;
+      AILevel = 2;
+      StartInAir = 2;
+      Engageable = 1;
+      Vulnerable = 1;
+      LimitAmmo = 1;
+      AIRTBDecision = 1;
+      Renewable = 1;
+      PayloadId = 3;
+      WMMask = 1;
+      Fuel = 0;
+      RouteTime = 0;
+      RenewTime = 1800;
+      Altitude = 500;
+      Spotter = -1;
+      Model = "graphics\planes\yak1s127\yak1s127.mgm";
+      Script = "LuaScripts\WorldObjects\Planes\yak1s127.txt";
+      Name = "ensure no one is still playing before spawning";
+      Skin = "";
+      AvMods = "";
+      AvSkins = "";
+      AvPayloads = "";
+      Callsign = 0;
+      Callnum = 0;
+      TCode = "%20%20";
+      TCodeColors = "00";
+    }
+    Plane
+    {
+      SetIndex = 0;
+      Number = 1;
+      AILevel = 2;
+      StartInAir = 2;
+      Engageable = 1;
+      Vulnerable = 1;
+      LimitAmmo = 1;
+      AIRTBDecision = 1;
+      Renewable = 1;
+      PayloadId = 8;
+      WMMask = 1;
+      Fuel = 0;
+      RouteTime = 0;
+      RenewTime = 1800;
+      Altitude = 500;
+      Spotter = -1;
+      Model = "graphics\planes\p51b5\p51b5.mgm";
+      Script = "LuaScripts\WorldObjects\Planes\p51b5.txt";
+      Name = "ensure no one is still playing before spawning";
+      Skin = "";
+      AvMods = "";
+      AvSkins = "";
+      AvPayloads = "";
+      Callsign = 0;
+      Callnum = 0;
+      TCode = "%20%20%20";
+      TCodeColors = "000";
+    }
+    Plane
+    {
+      SetIndex = 0;
+      Number = 1;
+      AILevel = 2;
+      StartInAir = 2;
+      Engageable = 1;
+      Vulnerable = 1;
+      LimitAmmo = 1;
+      AIRTBDecision = 1;
+      Renewable = 1;
+      PayloadId = 28;
+      WMMask = 1;
+      Fuel = 0;
+      RouteTime = 0;
+      RenewTime = 1800;
+      Altitude = 500;
+      Spotter = -1;
+      Model = "graphics\planes\p51d15\p51d15.mgm";
+      Script = "LuaScripts\WorldObjects\Planes\p51d15.txt";
+      Name = "ensure no one is still playing before spawning";
+      Skin = "";
+      AvMods = "";
+      AvSkins = "";
+      AvPayloads = "";
+      Callsign = 0;
+      Callnum = 0;
+      TCode = "%20%20%20";
+      TCodeColors = "000";
+    }
+    Plane
+    {
+      SetIndex = 0;
+      Number = 1;
+      AILevel = 2;
+      StartInAir = 2;
+      Engageable = 1;
+      Vulnerable = 1;
+      LimitAmmo = 1;
+      AIRTBDecision = 1;
+      Renewable = 1;
+      PayloadId = 7;
+      WMMask = 1;
+      Fuel = 0;
+      RouteTime = 0;
+      RenewTime = 1800;
+      Altitude = 500;
+      Spotter = -1;
+      Model = "graphics\planes\spad13\spad13.mgm";
+      Script = "LuaScripts\WorldObjects\Planes\spad13.txt";
+      Name = "ensure no one is still playing before spawning";
+      Skin = "";
+      AvMods = "";
+      AvSkins = "";
+      AvPayloads = "";
+      Callsign = 0;
+      Callnum = 0;
+      TCode = "%20%20%20";
+      TCodeColors = "000";
+    }
+    Plane
+    {
+      SetIndex = 0;
+      Number = 1;
+      AILevel = 2;
+      StartInAir = 2;
+      Engageable = 1;
+      Vulnerable = 1;
+      LimitAmmo = 1;
+      AIRTBDecision = 1;
+      Renewable = 1;
+      PayloadId = 24;
+      WMMask = 1;
+      Fuel = 0;
+      RouteTime = 0;
+      RenewTime = 1800;
+      Altitude = 500;
+      Spotter = -1;
+      Model = "graphics\planes\aircodh4\aircodh4.mgm";
+      Script = "LuaScripts\WorldObjects\Planes\aircodh4.txt";
+      Name = "ensure no one is still playing before spawning";
+      Skin = "";
+      AvMods = "";
+      AvSkins = "";
+      AvPayloads = "";
+      Callsign = 0;
+      Callnum = 0;
+      TCode = "%20%20%20";
+      TCodeColors = "000";
+    }
+    Plane
+    {
+      SetIndex = 0;
+      Number = 1;
+      AILevel = 2;
+      StartInAir = 2;
+      Engageable = 1;
+      Vulnerable = 1;
+      LimitAmmo = 1;
+      AIRTBDecision = 1;
+      Renewable = 1;
+      PayloadId = 6;
+      WMMask = 1;
+      Fuel = 0;
+      RouteTime = 0;
+      RenewTime = 1800;
+      Altitude = 500;
+      Spotter = -1;
+      Model = "graphics\planes\nieuport11\nieuport11.mgm";
+      Script = "LuaScripts\WorldObjects\Planes\nieuport11.txt";
+      Name = "ensure no one is still playing before spawning";
+      Skin = "";
+      AvMods = "";
+      AvSkins = "";
+      AvPayloads = "";
+      Callsign = 0;
+      Callnum = 0;
+      TCode = "%20%20";
+      TCodeColors = "00";
+    }
+  }
+  ReturnPlanes = 0;
+  Hydrodrome = 0;
+  RepairFriendlies = 0;
+  RehealFriendlies = 0;
+  RearmFriendlies = 0;
+  RefuelFriendlies = 0;
+  RepairTime = 0;
+  RehealTime = 0;
+  RearmTime = 0;
+  RefuelTime = 0;
+  MaintenanceRadius = 1000;
+}
+
+
+
+MCU_TR_Entity
+{
+  Index = 16;
+  Name = "Airfield entity";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 541.459;
+  YPos = 17.981;
+  ZPos = 5783.374;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  MisObjID = 15;
+  OnEvents
+  {
+    OnEvent
+    {
+      Type = 20;
+      TarId = 12;
+    }
+  }
+}
+
+
+
+MCU_TR_NextMission
+{
+  Index = 18;
+  Name = "Mimec Menu Mission";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 3601.336;
+  YPos = 138.147;
+  ZPos = 8109.474;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  NextMissionName = "multiplayer\dogfight\pwcg\menu";
+}
+
+
+
+MCU_TR_MissionEnd
+{
+  Index = 19;
+  Name = "Mimec Mission End";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 2569.268;
+  YPos = 111.530;
+  ZPos = 8025.754;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  Succeeded = 0;
+}
+
+
+
+Effect
+{
+  Name = "MIMEC Signal Green";
+  Index = 20;
+  LinkTrId = 21;
+  XPos = 1441.653;
+  YPos = 64.736;
+  ZPos = 8037.774;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Script = "luascripts\worldobjects\mapemitters\signalsmoke_green.txt";
+  Model = "";
+  Desc = "";
+}
+
+
+
+MCU_TR_Entity
+{
+  Index = 21;
+  Name = "Effect entity";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 1441.653;
+  YPos = 64.936;
+  ZPos = 8037.774;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  MisObjID = 20;
+}
+
+
+
+MCU_CMD_Effect
+{
+  Index = 23;
+  Name = "Mimec command Effect";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 555.297;
+  YPos = 17.854;
+  ZPos = 8038.853;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  ActionType = 0;
+}
+
+
+
+MCU_TR_MissionBegin
+{
+  Index = 24;
+  Name = "Mimec Translator Mission Begin";
+  Desc = "";
+  Targets = [];
+  Objects = [];
+  XPos = 3657.129;
+  YPos = 153.007;
+  ZPos = 9498.793;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+}
+
+
+# end of file
