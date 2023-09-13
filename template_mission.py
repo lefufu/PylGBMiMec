@@ -22,7 +22,7 @@ newMission=Mission()
 #The mission is read below
 #You can use full path like "D:\\jeux\\IL-2 Sturmovik Great Battles\\data\\Missions\\MyMission.Mission")
 #just beware of using "\\" instead of "\" in the path
-readMissionFromFile(newMission, "testing\\MyMission.Mission")
+readMissionFromFile(newMission, "testing\\MyMissionN2.Mission")
 
 #will display a summary of the mission contain
 print("Mission summary :")
@@ -55,7 +55,7 @@ changedName = lambda obj: "\""+obj.PropList['Name'].replace("\"","")+"_test"+"\"
 # and its Country to 'Germany"
 # notice that object ID29 named "Plane" does not have a linkTrId, and for the moment MiMec will not create it.
 # So Enabled can not be changed
-modify_kv(newMission, planeList, XPos=changedX, AILevel=1, Name=changedName, Enabled=0, Country=CountryID['Germany'])
+set_kv(newMission, planeList, XPos=changedX, AILevel=1, Name=changedName, Enabled=0, Country=CountryID['Germany'])
 #Display the modifications
 print("\nAfter modification:")
 print(scanObjectList(newMission, planeList, 'Name', 'Type', 'LinkTrId','Country','XPos','AILevel','Enabled'))
@@ -66,7 +66,7 @@ blockTarget = findObject(newMission, Type='MCU', Name='command Attack')
 #Then find block list
 block2Modify = findObjectInRange(newMission, blockTarget, Range=900, Type='Block')
 #Then let's modify the country to "Germany" for these blocks
-modify_kv(newMission, block2Modify, Country=CountryID['Germany'])
+set_kv(newMission, block2Modify, Country=CountryID['Germany'])
 
 #Now, let's update a complex MCU scripts and country
 #at first let's find the one who is using il2m41 as script (only a part of script name will work)
@@ -90,7 +90,7 @@ print('copy object features')
 defautlObjects=Mission()
 readMissionFromFile(defautlObjects, "pylgbmimec\\declarations\\default_objets.Mission")
 newID=copy_from_mission(newMission, defautlObjects, 'Group3', Name='Vehicle')
-modify_kv(newMission, newID, Name='Vehicle_Copied_In_Group3' )
+set_kv(newMission, newID, Name='Vehicle_Copied_In_Group3')
 
 #now let's delete object "Plane2_test" in Group1
 print("\n******************")
