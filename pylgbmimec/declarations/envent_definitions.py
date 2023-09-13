@@ -1,9 +1,50 @@
-from ..basic_functions.error_handling import criticalError, REPORT_NOT_DEFINED_FOR_TYPE, EVENT_NOT_DEFINED_FOR_TYPE
+from basic_functions.error_handling import criticalError, REPORT_NOT_DEFINED_FOR_TYPE, EVENT_NOT_DEFINED_FOR_TYPE
 
 """ definition of event name and ID to ease their use"""
 
 event_name=dict()
 event_name['Plane']={
+    0: 'OnPilotKilled',
+    1: 'OnPilotWounded',
+    2: 'OnPlaneCrashed',
+    3: 'OnPlaneCriticalDamage',
+    4: 'OnPlaneDestroyed',
+    5: 'OnPlaneLanded',
+    6: 'OnPlaneTookOff',
+    7: 'OnPlaneBingoFuel',
+    8: 'OnPlaneBingoMainMG',
+    9: 'OnPlaneBingoBombs',
+    10: 'OnPlaneBingoTurrets',
+    11: 'OnPlaneGunnersKilled',
+    12: 'OnDamaged',
+    13: 'OnKilled',
+    15: 'OnMovedTo',
+    20: 'OnPlaneSpawned',
+    21: 'OnOutOfPlanes',
+    22: 'OnPlaneAdded',
+    23: 'OnFlagBlocked',
+    24: 'OnFlagUnblocked',
+    25: 'OnFlagCapturedBy00',
+    26: 'OnFlagCapturedBy01',
+    27: 'OnFlagCapturedBy02',
+    28: 'OnFlagCapturedBy03',
+    29: 'OnFlagCapturedBy04',
+    30: 'OnFlagCapturedBy05',
+    31: 'OnFlagCapturedBy06',
+    32: 'OnFlagCapturedBy07',
+    33: 'OnFlagCapturedBy08',
+    34: 'OnFlagCapturedBy09',
+    35: 'OnFlagCapturedBy10',
+    36: 'OnFlagCapturedBy11',
+    37: 'OnFlagCapturedBy12',
+    38: 'OnFlagCapturedBy13',
+    39: 'OnFlagCapturedBy14',
+    40: 'OnFlagCapturedBy15',
+    41: 'OnFlagCapturedBy16',
+    74: 'OnSpottingStarted',
+    79: 'OnPlaneBingoCargo'
+}
+event_name['Airfield']={
     0: 'OnPilotKilled',
     1: 'OnPilotWounded',
     2: 'OnPlaneCrashed',

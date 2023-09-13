@@ -1,4 +1,4 @@
-from ..basic_functions.error_handling import criticalError, REPORT_NOT_DEFINED_FOR_TYPE
+from basic_functions.error_handling import criticalError, REPORT_NOT_DEFINED_FOR_TYPE
 
 """ definition of report name and ID to ease their use"""
 
