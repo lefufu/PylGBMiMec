@@ -1,13 +1,12 @@
 from basic_functions.find_object import findObject, findObjectInRange
-from basic_functions.mission_class import Mission, findGridOfPos
-from basic_functions.modify_object import deleteObject, set_kv, get_kv, set_as_targetList, add_in_targetList, \
+from basic_functions.mission_class import Mission
+from basic_functions.modify_object import set_kv, get_kv, set_as_targetList, add_in_targetList, \
     add_OnEvents
 from basic_functions.object_creation import copy_from_mission
 from basic_functions.properties_class import Properties
 from declarations.properties_specials import AIRFIELD, XPOS, ZPOS, YPOS, MCUWAYPOINT, NAME, YORI, COUNTRY, LINKTRID, \
-    MISOBJID, MCUCOUNTER, MCUTIMER, MCUDELETE, MCUBEHAVIOUR, MCUTR, STARTINAIR, MCUMISSION, MCUENDMISSION, TIME, VEHICLE
-from declarations.template_declaration import TEMPLATEAIRFIELD, TEMPLATECOUNTER, TEMPLATETIMER, TEMPLATEDELETE, \
-    TEMPLATEBEHAVIOUR, COUNTERNAME, TIMERNAME, DELETENAME, BEHAVIOURNAME, SETPLANESET, TAKEOFFNAME, TOTALDISTANCE, \
+    MISOBJID, MCUTIMER, MCUBEHAVIOUR, STARTINAIR, MCUMISSION, MCUENDMISSION, TIME, VEHICLE
+from declarations.template_declaration import TEMPLATEAIRFIELD, TEMPLATETIMER, TEMPLATEBEHAVIOUR, TAKEOFFNAME, TOTALDISTANCE, \
     TARGETSTATUS, AIRSTARTNAME, TEMPLATEMENUAIRFIELD, TEMPLATEMENUMISSION, MENUMISSIONMCUNAME, TEMPLATEENDMISSION, \
     CANVASNAME, TAKEOFFWAYPTNAME, SETCOUNTRY, DEACTIVNAME, ACTIVNAME
 import math

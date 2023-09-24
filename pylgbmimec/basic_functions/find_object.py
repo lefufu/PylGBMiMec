@@ -5,7 +5,7 @@ import math
 import re
 from basic_functions.mission_class import Mission, INVALID_TYPE_FOR_RANGE, criticalError, BAD_FILTER_RANGE, rangeGrid, \
     DOUBLE_RANGE_FILTER
-from basic_functions.warning_handling import PROP_NOT_EXISTING, ONLY_FIRST_OBJECT_USED, warning_msg, EMPTY_CENTER, \
+from basic_functions.warning_handling import PROP_NOT_EXISTING, ONLY_FIRST_OBJECT_USED, warning_msg, \
     TYPE_NOT_SUPPORTED_FOR_REQUEST
 
 from declarations.properties_specials import XPOS, ZPOS, TYPE, GROUP, INDEX, NAME, OBJECTSCRIPT, OBJECTS, \

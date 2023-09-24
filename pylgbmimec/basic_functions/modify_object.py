@@ -5,10 +5,10 @@ from basic_functions.find_object import findObject
 from basic_functions.group import findGroup, removeFromGroup
 from basic_functions.mission_class import Mission, Properties
 from basic_functions.warning_handling import warning_msg, PROP_TO_MODIFY_NOT_EXISTS, ENTITY_NOT_LINKED, \
-    PROP_NOT_EXISTING, PROP_NOT_EXISTING_FOR_MOD
+    PROP_NOT_EXISTING_FOR_MOD
 from declarations.envent_definitions import findEvent
 from declarations.properties_specials import ONREPORTS, ONEVENTS, LINKTRID, NAME, INDEX, TYPE, CMDID, TARID, \
-    OBJECTSCRIPT, COUNTRIES, COUNTRY, ONREPORT, ONEVENT, TARGETS, MCUTR, MCUCTRIGGER, SUBTITLEINFO, LCTEXT, OBJECTS
+    OBJECTSCRIPT, COUNTRY, ONREPORT, ONEVENT, TARGETS, MCUTR, MCUCTRIGGER, SUBTITLEINFO, LCTEXT, OBJECTS
 from declarations.report_definitions import findReport
 
 # ---------------------------------------------

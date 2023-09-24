@@ -1,18 +1,10 @@
-from basic_functions.find_object import findObject, findObjectInRange
+from basic_functions.find_object import findObject
 from basic_functions.mission_class import Mission
-from basic_functions.modify_object import set_kv, add_OnEvents, set_as_targetList, set_as_objectList
-from basic_functions.object_creation import copy_from_mission
 from basic_functions.properties_class import Properties
-from high_level_functions import properties_functions
-from declarations.properties_specials import XPOS, ZPOS, LINKTRID, \
-    MCUCOUNTER, MCUTIMER, MCUDELETE, MCUBEHAVIOUR, AIRFIELD, MCUTR, MCUWAYPOINT, MCUCTRIGGER, YPOS, COUNTRY, TIME, \
-    ENABLED, MCUDEACTIVATE, MCUACTIVATE, EVENTENTER, MCUTAKEOFF, EVENTTOOKOFF, EFFECT, MCUCMDEFFECT, MCUMISSIONBEGIN
-from declarations.template_declaration import TEMPLATECOUNTER, TEMPLATETIMER, TEMPLATEDELETE, \
-    TEMPLATEBEHAVIOUR, COUNTERNAME, TIMERNAME, DELETENAME, BEHAVIOURNAME, SETPLANESET, TEMPLATEAIRFIELD, TRNAME, \
-    SETONSPAWN, BEHDEACTALL, SETCOUNTRY, TEMPLATECTRIGGER, CTRIGGERNAME, BEHAVAFNAME, AFTIMERNAME, TEMPLATEDEACTIVATE, \
-    DEACTIVATENAME, TEMPLATEACTIVATE, ACTIVATENAME, TAKEOFFNAME, TAKEOFFCOMMAND, CTRIGGERTAKEOFF, STARTALLNAME, \
-    TEMPLATESIGNALNAME, SIGNALNAME, ACTIVNAME, DEACTIVNAME, TEMPLATECOMMAND, TEMPLATEBEGIN, BEGINNAME
-from high_level_functions.properties_functions import setObjectKvs
+from declarations.properties_specials import XPOS, ZPOS, MCUTIMER, AIRFIELD, MCUCTRIGGER, YPOS, ENABLED, MCUDEACTIVATE, \
+    MCUTAKEOFF, EVENTTOOKOFF
+from declarations.template_declaration import TEMPLATECTRIGGER, TEMPLATEDEACTIVATE, \
+    DEACTIVATENAME, TAKEOFFNAME, TAKEOFFCOMMAND, CTRIGGERTAKEOFF
 
 
 def createstartFlightLogic(mission: Mission, planelist: list, groupName: str, airfieldList : list, PWCGsettings: dict, templateMission:Mission, escortInfoList):

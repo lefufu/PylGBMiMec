@@ -1,19 +1,13 @@
 from basic_functions.find_object import findObject, findObjectInRange
 from basic_functions.mission_class import Mission
 from basic_functions.modify_object import deleteObject, add_in_targetList, add_OnEvents, set_kv, set_subtitleValues, \
-    add_in_objectList, set_as_targetList, get_kv
+    set_as_targetList, get_kv
 from basic_functions.object_creation import copy_from_mission
-from basic_functions.properties_class import Properties
-from declarations.properties_specials import XPOS, ZPOS, LINKTRID, \
-    MCUCOUNTER, MCUTIMER, MCUDELETE, MCUBEHAVIOUR, AIRFIELD, MCUTR, MCUWAYPOINT, MCUCTRIGGER, YPOS, COUNTRY, TIME, \
-    ENABLED, MCUDEACTIVATE, MCUACTIVATE, EVENTENTER, MCUBEGIN, MCUTAKEOFF, STARTINAIR, PLANE, NAME, EFFECT, MCUSUBTITLE, \
-    MCUCMDEFFECT, MCUMISSIONBEGIN, TARGETS
-from declarations.template_declaration import TEMPLATECOUNTER, TEMPLATETIMER, TEMPLATEDELETE, \
-    TEMPLATEBEHAVIOUR, COUNTERNAME, TIMERNAME, DELETENAME, BEHAVIOURNAME, SETPLANESET, TEMPLATEAIRFIELD, TRNAME, \
-    SETONSPAWN, BEHDEACTALL, SETCOUNTRY, TEMPLATECTRIGGER, CTRIGGERNAME, BEHAVAFNAME, AFTIMERNAME, TEMPLATEDEACTIVATE, \
-    DEACTIVATENAME, TEMPLATEACTIVATE, ACTIVATENAME, GLOBALCOUNTERNAME, STARTALLNAME, TAKEOFFCOMMAND, AIRSTART, \
-    AIRSTARTNAME, AIRSTARTFORCETAKEOFF, SIGNALNAME, TAKEOFFNAME, ACTIVNAME, DEACTIVNAME, CTRIGGERTAKEOFF, \
-    TEMPLATESUBTITLE, TEMPLATEBEGIN, BEGINNAME, LAUNCHNAME, GOTONAME
+from declarations.properties_specials import XPOS, ZPOS, MCUCOUNTER, MCUTIMER, AIRFIELD, MCUCTRIGGER, MCUBEGIN, MCUTAKEOFF, STARTINAIR, PLANE, \
+    MCUSUBTITLE
+from declarations.template_declaration import TEMPLATECOUNTER, TEMPLATETIMER, TIMERNAME, GLOBALCOUNTERNAME, STARTALLNAME, TAKEOFFCOMMAND, AIRSTART, \
+    AIRSTARTNAME, SIGNALNAME, TAKEOFFNAME, ACTIVNAME, CTRIGGERTAKEOFF, \
+    TEMPLATESUBTITLE, LAUNCHNAME, GOTONAME
 
 
 def createStartLogicAll(mission: Mission, planelist: list, groupList: list, airfieldList : list, PWCGsettings: dict, templateMission:Mission, startTrigger:list, escortInfoList:dict):

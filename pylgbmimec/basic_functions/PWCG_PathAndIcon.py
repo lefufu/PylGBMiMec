@@ -2,14 +2,11 @@ import math
 
 from basic_functions.find_object import findObject, findObjectInRange
 from basic_functions.mission_class import Mission
-from basic_functions.modify_object import deleteObject, get_kv, set_kv
+from basic_functions.modify_object import set_kv
 from basic_functions.nameAndComment import createComment
-from basic_functions.properties_class import Properties
-from declarations.properties_specials import XPOS, ZPOS, LINKTRID, \
-    MCUCOUNTER, MCUTIMER, MCUDELETE, MCUBEHAVIOUR, AIRFIELD, MCUTR, MCUWAYPOINT, MCUCTRIGGER, YPOS, COUNTRY, TIME, \
-    ENABLED, MCUDEACTIVATE, MCUACTIVATE, EVENTENTER, MCUTAKEOFF, EVENTTOOKOFF, MCUICON, NAME, INDEX, SPEED, \
-    WAYPOINTICONID, LINETYPE, LCNAME, LCDESC, RCOLOR, GCOLOR, BCOLOR, ICONID, ACTIONICONID, COALITIONS, MCULAND, \
-    STARTINAIR, PLANE, MODEL, SCRIPT, GUIMAP
+from declarations.properties_specials import XPOS, ZPOS, AIRFIELD, MCUWAYPOINT, MCUCTRIGGER, YPOS, MCUICON, NAME, INDEX, SPEED, \
+    LINETYPE, LCNAME, LCDESC, RCOLOR, GCOLOR, BCOLOR, ICONID, ACTIONICONID, MCULAND, \
+    STARTINAIR, PLANE, SCRIPT, GUIMAP
 from declarations.template_declaration import TOTALDISTANCE, LOCALDISTANCE, TARGETKEYWORD, TARGETSTATUS, PATHLINESTYLE, \
     TARGETICONNAME, CTRIGGERTAKEOFF, STARTALLCOMMENT, STARTALLNAME
 

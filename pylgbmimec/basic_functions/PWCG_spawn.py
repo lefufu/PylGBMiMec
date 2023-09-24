@@ -1,12 +1,11 @@
 from basic_functions.find_object import findObject
 from basic_functions.mission_class import Mission
-from basic_functions.modify_object import get_kv, add_OnEvents
 from basic_functions.properties_class import Properties
 from declarations.properties_specials import XPOS, ZPOS, LINKTRID, \
-    MCUCOUNTER, MCUTIMER, MCUDELETE, MCUBEHAVIOUR, AIRFIELD, MCUTR, STARTINAIR, EFFECT
+    MCUCOUNTER, MCUTIMER, MCUDELETE, MCUBEHAVIOUR, MCUTR, STARTINAIR
 from declarations.template_declaration import TEMPLATECOUNTER, TEMPLATETIMER, TEMPLATEDELETE, \
-    TEMPLATEBEHAVIOUR, COUNTERNAME, TIMERNAME, DELETENAME, BEHAVIOURNAME, SETPLANESET, TEMPLATEAIRFIELD, TRNAME, \
-    SETONSPAWN, TEMPLATESIGNALNAME, SIGNALNAME
+    TEMPLATEBEHAVIOUR, COUNTERNAME, TIMERNAME, DELETENAME, BEHAVIOURNAME, SETPLANESET, TRNAME, \
+    SETONSPAWN
 
 lastX = -1
 lastY = -1

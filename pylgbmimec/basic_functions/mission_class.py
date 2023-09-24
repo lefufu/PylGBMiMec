@@ -1,10 +1,9 @@
 #from typing import List, Any
 
-from pylgbmimec.basic_functions.file_functions import getBegining, readGroupFromFile, readObjectFromFile, readLine
-from pylgbmimec.basic_functions.object_class import *
-from pylgbmimec.declarations.map_size import *
-from pylgbmimec.declarations.properties_specials import GUIMAP, OPTIONS, GROUP, XPOS, ZPOS, LCNAME, LCDESC
-
+from basic_functions.file_functions import getBegining, readGroupFromFile, readObjectFromFile
+from basic_functions.object_class import *
+from declarations.properties_specials import GUIMAP, OPTIONS, GROUP, XPOS, ZPOS, LCNAME, LCDESC
+from declarations.map_size import map_size, SPLIT_MAP
 
 class Mission:
     """Mission Class, contain an array of AllObject objects

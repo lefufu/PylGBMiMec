@@ -2,15 +2,14 @@ import os
 import shutil
 
 from basic_functions.error_handling import *
-from basic_functions.find_object import findObject
 from basic_functions.mission_class import Mission, strProp, offset
 from basic_functions.object_class import AllObject
 from declarations.template_declaration import GROUPOFFSET
 
 #header and footer to add in mission file
-from pylgbmimec.declarations.country import CountryName
-from pylgbmimec.declarations.properties_specials import NAME, INDEX, DESC, GROUP, COUNTRY, DEFAULTEXTENSION, \
-    LANGAGEEXTENSION, MCUMISSIONBEGIN
+from declarations.country import CountryName
+from declarations.properties_specials import NAME, INDEX, DESC, GROUP, COUNTRY, DEFAULTEXTENSION, \
+    LANGAGEEXTENSION
 
 HEADER = "# Mission File Version = 1.0;\n"
 FOOTER = "\n# end of file"
@@ -79,10 +78,18 @@ def saveMission(mission:Mission, filename: str = ''):
 
     # copy langage files
     for extension in LANGAGEEXTENSION:
-         origLangFileName = mission.FileName.replace('.Mission',DEFAULTEXTENSION)
-         destLangFileName = filename.replace('.Mission',extension)
-         if os.path.exists(origLangFileName):
-             shutil.copyfile(origLangFileName,destLangFileName)
+
+        if '.Mission' in mission.FileName:
+            origLangFileName = mission.FileName.replace('.Mission',DEFAULTEXTENSION)
+            destLangFileName = filename.replace('.Mission',extension)
+        else:
+            origLangFileName = mission.FileName.replace('.mission',DEFAULTEXTENSION)
+            destLangFileName = filename.replace('.mission',extension)
+
+        if os.path.exists(origLangFileName):
+            shutil.copyfile(origLangFileName,destLangFileName)
+        else:
+            criticalError(CAN_NOT_OPEN_FILE.format(origLangFileName))
 
     # process all level 0 objects
     #rollback negative numbers of Groups

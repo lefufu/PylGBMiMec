@@ -1,11 +1,9 @@
 #  Contain function do create object
 #  User level :
 
-from basic_functions.error_handling import *
-from basic_functions.find_object import findObject, printObjects, findGroupByName
+from basic_functions.find_object import findObject, findGroupByName
 from basic_functions.group import addInGroup
-from basic_functions.mission_class import Mission, Properties
-
+from basic_functions.mission_class import Mission
 
 from basic_functions.object_class import AllObject
 from declarations.properties_specials import INDEX, LINKTRID, MISOBJID, TARGETS

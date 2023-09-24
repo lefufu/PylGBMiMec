@@ -3,30 +3,25 @@ Version 1.0
 2023/07/10, Lefuneste
 See https://github.com/lefufu/PylGBMiMec/blob/master/README.md
  """
-import unicodedata
 
-import pylgbmimec.basic_functions.warning_handling
 from basic_functions.PWCG_PathAndIcon import getPathInfo, createFlightIcons, changeMissionComment, reduceGroupName
 from basic_functions.PWCG_spawn import createSpawnLogic
 from basic_functions.PWCG_startObjects import createStartLogicAll
 from basic_functions.PWCG_switchAirfield import createAirfieldSwich
 from basic_functions.createObjectLogic import createstartFlightLogic
-from declarations.template_declaration import AIBEST, RADARNAME
+from declarations.template_declaration import RADARNAME
+from declarations.properties_specials import *
 # Lines started with "#" are comment
 # DO NOT MODIFY the line below, they are needed to make the python working
-from pylgbmimec.basic_functions.mission_class import *
-from pylgbmimec.basic_functions.find_object import *
-from pylgbmimec.basic_functions.modify_object import *
-from pylgbmimec.basic_functions.object_creation import copy_from_mission
-from pylgbmimec.basic_functions.save_mission import *
-from pylgbmimec.declarations.country import *
-from pylgbmimec.declarations.properties_specials import *
-from pylgbmimec.basic_functions.readGlobalParameters import *
-from pylgbmimec.basic_functions.PWCG_airfield import createAirfields, createMenuAirfield
+from basic_functions.mission_class import *
+from basic_functions.modify_object import *
+from basic_functions.save_mission import *
+from basic_functions.readGlobalParameters import *
+from basic_functions.PWCG_airfield import createAirfields, createMenuAirfield
 import sys
 
 #Add or Remove warnings (seems not working...)
-pylgbmimec.declarations.properties_specials.WARNING_LEVEL=0
+#pylgbmimec.declarations.properties_specials.WARNING_LEVEL=0
 
 # Read default variables.
 PWCGsettings=initialize_variables_from_file('settings.json')
